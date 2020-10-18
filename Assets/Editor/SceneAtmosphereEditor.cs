@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class SceneAtmosphereEditor : EditorWindow
 {
@@ -13,6 +15,8 @@ public class SceneAtmosphereEditor : EditorWindow
     bool infoFO = false;
     bool sceneSettingsFO = false;
     bool lightProfileSettingsFO = false;
+
+    int sortMode = 0; //0 == Name / 1 == Type
 
     [MenuItem("Tools/Atmosphere")]
     public static void ShowWindow()
@@ -53,38 +57,36 @@ public class SceneAtmosphereEditor : EditorWindow
     void LightsInScene()
     {
         GUILayout.BeginVertical("Box");
-        GUILayout.Label("Lights", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Refresh Lights"))
+        if (GUILayout.Button("Refresh", GUILayout.Width(60)))
         {
             RefreshLightsData();
         }
 
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Sort:", EditorStyles.boldLabel);
+        if (GUILayout.Button("Name"))
+        {
+        }
+        if (GUILayout.Button("Type"))
+        {
+        }
+        GUILayout.EndHorizontal();
+
+
+        //Lights
         try
         {
             for (int i = 0; i < lightData.lights.Count; i++)
             {
                 GUILayout.BeginHorizontal();
 
-                lightData.lights[i].foldOut = EditorGUILayout.Foldout(lightData.lights[i].foldOut, lightData.lights[i].obj.name);
-
-                switch(lightData.lights[i].light.type)
+                //lightData.lights[i].foldOut = EditorGUILayout.Foldout(lightData.lights[i].foldOut, lightData.lights[i].obj.name);
+                if (GUILayout.Button(lightData.lights[i].obj.name + " - " + lightData.lights[i].light.type.ToString()))
                 {
-                    case LightType.Point:
-                        GUILayout.Label("Point");
-                        break;
-                    case LightType.Directional:
-                        GUILayout.Label("Directional");
-                        break;
-                    case LightType.Area:
-                        GUILayout.Label("Area");
-                        break;
-                    case LightType.Spot:
-                        GUILayout.Label("Spot");
-                        break;
+                    lightData.lights[i].foldOut = !lightData.lights[i].foldOut;
                 }
 
-                if (GUILayout.Button("Select", GUILayout.Width(80)))
+                if (GUILayout.Button("Select", GUILayout.Width(65)))
                 {
                     Selection.activeObject = lightData.lights[i].obj;
                 }
@@ -92,7 +94,9 @@ public class SceneAtmosphereEditor : EditorWindow
                 //Foldout
                 if (lightData.lights[i].foldOut)
                 {
-                    GUILayout.Label(lightData.lights[i].obj.name, EditorStyles.boldLabel);
+                    GUILayout.Label("Type: " + lightData.lights[i].light.type.ToString());
+                    GUILayout.Label("Intesity: " + lightData.lights[i].light.intensity.ToString());
+                    GUILayout.Label("Unit: " + lightData.lights[i].light.lightUnit.ToString());
                 }
             }
         }
@@ -124,7 +128,7 @@ public class SceneAtmosphereEditor : EditorWindow
         {
             SceneAtmosphereEditor_Lights newlight = new SceneAtmosphereEditor_Lights();
             newlight.obj = obj[i];
-            newlight.light = obj[i].GetComponent<Light>();
+            newlight.light = obj[i].GetComponent<HDAdditionalLightData>();
 
             bool checkexist = false;
             for (int o = 0; o < lightData.lights.Count; o++)
@@ -158,5 +162,5 @@ public class SceneAtmosphereEditor_Lights
 {
     public Object obj;
     public bool foldOut;
-    public Light light;
+    public HDAdditionalLightData light;
 }
