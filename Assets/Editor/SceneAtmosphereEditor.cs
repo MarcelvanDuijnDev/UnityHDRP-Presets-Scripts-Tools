@@ -59,7 +59,6 @@ public class SceneAtmosphereEditor : EditorWindow
     void ShowLightProfileSettings()
     {
         GUILayout.BeginVertical("Box");
-        GUILayout.Label("Environment Profile", EditorStyles.boldLabel);
         EnvironmentProfile();
         GUILayout.EndVertical();
     }
