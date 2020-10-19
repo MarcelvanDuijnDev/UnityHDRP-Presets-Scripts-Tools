@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class ExampleTestScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ExampleTestScript : MonoBehaviour
     [Header("Showinfo")]
     [SerializeField] private TextMeshProUGUI _InfoText;
     [SerializeField] private TextMeshProUGUI _InfoText2;
+
     void Start()
     {
         

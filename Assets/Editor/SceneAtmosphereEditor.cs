@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
 public class SceneAtmosphereEditor : EditorWindow
@@ -17,6 +18,10 @@ public class SceneAtmosphereEditor : EditorWindow
     bool lightProfileSettingsFO = false;
 
     int sortMode = 0; //0 == Name / 1 == Type
+
+    Color defautGuiColor;
+
+    VolumeProfile prof;
 
     [MenuItem("Tools/Atmosphere")]
     public static void ShowWindow()
@@ -38,10 +43,15 @@ public class SceneAtmosphereEditor : EditorWindow
         if (infoFO) { LightsInScene(); }
     }
 
+    public void Awake()
+    {
+        defautGuiColor = GUI.color;
+    }
+
     void ShowSceneSettings()
     {
         GUILayout.BeginVertical("Box");
-        GUILayout.Label("Scene Settings", EditorStyles.boldLabel);
+        GUILayout.Label("Scene Light Settings", EditorStyles.boldLabel);
 
         GUILayout.EndVertical();
     }
@@ -49,11 +59,18 @@ public class SceneAtmosphereEditor : EditorWindow
     void ShowLightProfileSettings()
     {
         GUILayout.BeginVertical("Box");
-        GUILayout.Label("Light Profile Settings", EditorStyles.boldLabel);
-
+        GUILayout.Label("Environment Profile", EditorStyles.boldLabel);
+        EnvironmentProfile();
         GUILayout.EndVertical();
     }
 
+    //EnvironmentProfile
+    void EnvironmentProfile()
+    {
+        prof = EditorGUILayout.ObjectField("Volume Profile:", prof, typeof(VolumeProfile), false) as VolumeProfile;
+    }
+
+    //Lights
     void LightsInScene()
     {
         GUILayout.BeginVertical("Box");
@@ -96,6 +113,9 @@ public class SceneAtmosphereEditor : EditorWindow
                 {
                     GUILayout.Label("Type: " + lightData.lights[i].light.type.ToString());
                     GUILayout.Label("Intesity: " + lightData.lights[i].light.intensity.ToString());
+
+                    //Show units
+                    CheckLightUnit(i);
                     GUILayout.Label("Unit: " + lightData.lights[i].light.lightUnit.ToString());
                 }
             }
@@ -107,7 +127,60 @@ public class SceneAtmosphereEditor : EditorWindow
 
         GUILayout.EndVertical();
     }
+    void CheckLightUnit(int lightid)
+    {
+        GUILayout.BeginHorizontal();
 
+        if(lightData.lights[lightid].light.lightUnit == LightUnit.Lumen)
+        { GUI.color = Color.green; } else { GUI.color = defautGuiColor;  }
+        EditorGUI.BeginDisabledGroup(CheckTypeAvailable(lightData.lights[lightid].light.type, LightUnit.Lumen));
+        if (GUILayout.Button("Lumen")) { lightData.lights[lightid].light.SetLightUnit(LightUnit.Lumen); }
+        EditorGUI.EndDisabledGroup();
+
+        if (lightData.lights[lightid].light.lightUnit == LightUnit.Candela)
+        { GUI.color = Color.green; }
+        else { GUI.color = defautGuiColor; }
+        EditorGUI.BeginDisabledGroup(CheckTypeAvailable(lightData.lights[lightid].light.type, LightUnit.Candela));
+        if (GUILayout.Button("Candela")) { lightData.lights[lightid].light.SetLightUnit(LightUnit.Candela); }
+        EditorGUI.EndDisabledGroup();
+
+        if (lightData.lights[lightid].light.lightUnit == LightUnit.Lux)
+        { GUI.color = Color.green; }
+        else { GUI.color = defautGuiColor; }
+        EditorGUI.BeginDisabledGroup(CheckTypeAvailable(lightData.lights[lightid].light.type, LightUnit.Lux));
+        if (GUILayout.Button("Lux")) { lightData.lights[lightid].light.SetLightUnit(LightUnit.Lux); }
+        EditorGUI.EndDisabledGroup();
+
+        if (lightData.lights[lightid].light.lightUnit == LightUnit.Nits)
+        { GUI.color = Color.green; }
+        else { GUI.color = defautGuiColor; }
+        EditorGUI.BeginDisabledGroup(CheckTypeAvailable(lightData.lights[lightid].light.type, LightUnit.Nits));
+        if (GUILayout.Button("Nits")) { lightData.lights[lightid].light.SetLightUnit(LightUnit.Nits); }
+        EditorGUI.EndDisabledGroup();
+
+        if (lightData.lights[lightid].light.lightUnit == LightUnit.Ev100)
+        { GUI.color = Color.green; }
+        else { GUI.color = defautGuiColor; }
+        EditorGUI.BeginDisabledGroup(CheckTypeAvailable(lightData.lights[lightid].light.type, LightUnit.Ev100));
+        if (GUILayout.Button("Ev100")) { lightData.lights[lightid].light.SetLightUnit(LightUnit.Ev100); }
+        EditorGUI.EndDisabledGroup();
+
+        GUILayout.EndHorizontal();
+        GUI.color = defautGuiColor;
+    }
+    bool CheckTypeAvailable(HDLightType type, LightUnit unittype)
+    {
+        if (type == HDLightType.Directional && unittype == LightUnit.Lumen || type == HDLightType.Directional && unittype == LightUnit.Candela || type == HDLightType.Directional && unittype == LightUnit.Nits || type == HDLightType.Directional && unittype == LightUnit.Ev100)
+            return true;
+        if (type == HDLightType.Point && unittype == LightUnit.Nits)
+            return true;
+        if (type == HDLightType.Spot && unittype == LightUnit.Nits)
+            return true;
+        if (type == HDLightType.Area && unittype == LightUnit.Candela || type == HDLightType.Area && unittype == LightUnit.Lux)
+            return true;
+
+        return false;
+    }
     void CheckRemovedLight()
     {
         for (int i = 0; i < lightData.lights.Count; i++)
@@ -119,7 +192,6 @@ public class SceneAtmosphereEditor : EditorWindow
             }
         }
     }
-
     void RefreshLightsData()
     {
         GameObject[] obj = getObjects();
@@ -140,7 +212,6 @@ public class SceneAtmosphereEditor : EditorWindow
                 lightData.lights.Add(newlight);
         }
     }
-
     GameObject[] getObjects()
     {
         Light[] scripts = FindObjectsOfType<Light>();
