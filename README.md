@@ -6,8 +6,6 @@ Feel free to use/copy files from this project._
 
 Trello: https://trello.com/b/lfyU2css/unitypresets
 
-**Working Scripts:**
-
 ## Movement 
 - [Movement_CC.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Movement/Movement_CC.cs)
 - [Movement_FreeCamera.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Movement/Movement_FreeCamera.cs)
