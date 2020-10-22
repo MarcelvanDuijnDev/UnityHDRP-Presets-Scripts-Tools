@@ -25,6 +25,7 @@ Trello: https://trello.com/b/lfyU2css/unitypresets
 - [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
 - [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
 - [ObjectPoolSimple.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPoolSimple.cs)
+- [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/OnCollision.cs)
 - [UIEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/UIEffects.cs)
 
 ## Random Examples
