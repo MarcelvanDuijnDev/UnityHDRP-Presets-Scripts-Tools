@@ -21,7 +21,7 @@ Trello: https://trello.com/b/lfyU2css/unitypresets
 ## Saving / Loading Data
 - [SaveLoad_JSON.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_JSON.cs)
 
-## Random useful
+## Useful
 - [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/DoEvent.cs)
 - [LightEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LightEffects.cs)
 - [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
@@ -30,7 +30,7 @@ Trello: https://trello.com/b/lfyU2css/unitypresets
 - [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/OnCollision.cs)
 - [UIEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/UIEffects.cs)
 
-## Random Examples
+## Examples
 - [ScriptebleGameObject.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/RandomExamples/ScriptebleGameObject.cs)
 - [StringFormats.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/RandomExamples/StringFormats.cs)
 
