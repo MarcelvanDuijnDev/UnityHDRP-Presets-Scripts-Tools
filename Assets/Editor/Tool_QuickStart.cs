@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 using System.IO;
 
@@ -83,24 +85,71 @@ public class Tool_QuickStart : EditorWindow
             {
                 SearchScripts();
             }
+            if (GUILayout.Button("Create"))
+            {
+                CreateTemplate();
+            }
 
             //Info
             if (_DimensionID == 0)
             {
                 switch (_Type2DID)
                 {
-                    case 0:
-                        ScriptStatus("Test1");
-                        ScriptStatus("Movement_CC");
+                    case 0: //Platformer
+                        GUILayout.Label("essential", EditorStyles.boldLabel);
+                        ScriptStatus("Bullet");
+                        GUILayout.Label("Extra", EditorStyles.boldLabel);
+                        ScriptStatus("UIEffects");
+                        ScriptStatus("DoEvent");
+                        ScriptStatus("LoadScenes");
                         break;
-                    case 1:
-                        ScriptStatus("Testtest1");
+                    case 1: //TopDown
+
                         break;
                 }
             }
             else
             {
+                switch (_Type3DID)
+                {
+                    case 0: //FPS
+                        GUILayout.Label("essential", EditorStyles.boldLabel);
+                        ScriptStatus("Bullet");
+                        ScriptStatus("Movement_CC");
+                        ScriptStatus("ObjectPool");
+                        GUILayout.Label("Extra", EditorStyles.boldLabel);
+                        ScriptStatus("UIEffects");
+                        ScriptStatus("DoEvent");
+                        ScriptStatus("OnCollision");
+                        ScriptStatus("LoadScenes");
+                        break;
+                    case 1: //ThirdPerson
+                        GUILayout.Label("essential", EditorStyles.boldLabel);
+                        ScriptStatus("Bullet");
+                        ScriptStatus("Movement_CC");
+                        ScriptStatus("Movement_Camera");
+                        ScriptStatus("ObjectPool");
+                        GUILayout.Label("Extra", EditorStyles.boldLabel);
+                        ScriptStatus("UIEffects");
+                        ScriptStatus("DoEvent");
+                        ScriptStatus("OnCollision");
+                        ScriptStatus("LoadScenes");
+                        break;
+                    case 2: //TopDown
+                        GUILayout.Label("essential", EditorStyles.boldLabel);
+                        ScriptStatus("Bullet");
+                        ScriptStatus("Movement_CC_TopDown");
+                        ScriptStatus("ObjectPool");
+                        GUILayout.Label("Extra", EditorStyles.boldLabel);
+                        ScriptStatus("UIEffects");
+                        ScriptStatus("DoEvent");
+                        ScriptStatus("OnCollision");
+                        ScriptStatus("LoadScenes");
+                        break;
+                    case 3: //Platformer
 
+                        break;
+                }
             }
         }
         else
@@ -135,8 +184,6 @@ public class Tool_QuickStart : EditorWindow
 
     void ScriptStatus(string name)
     {
-        EditorGUILayout.BeginHorizontal("Box");
-
         int scriptid = 0;
         for (int i = 0; i < _ScriptNames.Length; i++)
         {
@@ -151,8 +198,15 @@ public class Tool_QuickStart : EditorWindow
         { GUI.backgroundColor = new Color(0, 1, 0); }
         else
             GUI.backgroundColor = new Color(1, 0, 0);
-        GUILayout.Label(name + ".cs");
 
+        EditorGUILayout.BeginHorizontal("Box");
+        GUILayout.Label(name + ".cs");
+        EditorGUI.BeginDisabledGroup(_ScriptExist[scriptid]);
+        if (GUILayout.Button("Add", GUILayout.Width(50)))
+        {
+            AddScript(scriptid);
+        }
+        EditorGUI.EndDisabledGroup();
 
         EditorGUILayout.EndHorizontal();
     }
@@ -176,6 +230,82 @@ public class Tool_QuickStart : EditorWindow
                                                new object[] { _ScriptNames[id].Replace(" ", "") })))
             {
                 sw.Write(_ScriptCode[id]);
+            }
+        }
+    }
+
+    void CreateTemplate()
+    {
+        Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+        CreateObjects();
+    }
+    void CreateObjects()
+    {
+        //3D
+        if (_DimensionID == 1)
+        {
+            GameObject groundCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            groundCube.name = "Ground";
+            groundCube.transform.position = new Vector3(0, 0, 0);
+
+            GameObject player = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            player.name = "Player";
+            player.transform.position = new Vector3(0, 2, 0);
+
+            GameObject cameraObj = GameObject.Find("Main Camera");
+
+            switch (_Type3DID)
+            {
+                case 0:
+                    groundCube.transform.localScale = new Vector3(25, 1, 25);
+                    cameraObj.transform.parent = player.transform;
+                    cameraObj.transform.localPosition = new Vector3(0, 0.65f, 0);
+                    break;
+                case 1:
+                    groundCube.transform.localScale = new Vector3(25, 1, 25);
+                    GameObject rotationPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    rotationPoint.name = "rotationPoint";
+                    rotationPoint.transform.position = new Vector3(0, 2, 0);
+                    cameraObj.transform.parent = rotationPoint.transform;
+                    cameraObj.transform.localPosition = new Vector3(1, 0.65f, -1.5f);
+                    rotationPoint.transform.parent = player.transform;
+                    break;
+                case 2:
+                    groundCube.transform.localScale = new Vector3(25, 1, 25);
+                    cameraObj.transform.position = new Vector3(0, 10, -1.5f);
+                    cameraObj.transform.eulerAngles = new Vector3(80, 0, 0);
+                    break;
+                case 3:
+                    groundCube.transform.localScale = new Vector3(25, 1, 1);
+                    break;
+            }
+        }
+
+        //2D
+        if (_DimensionID == 0)
+        {
+            GameObject groundCube = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            groundCube.name = "Ground";
+            groundCube.transform.position = new Vector3(0, 0, 0);
+
+            GameObject player = GameObject.CreatePrimitive(PrimitiveType.Quad);
+            player.name = "Player";
+            player.transform.position = new Vector3(0, 2, 0);
+
+            GameObject cameraObj = GameObject.Find("Main Camera");
+            Camera cam = cameraObj.GetComponent<Camera>();
+            cam.orthographic = true;
+
+            //Platformer
+            if (_Type2DID == 0)
+            {
+                groundCube.transform.localScale = new Vector3(25, 1, 1);
+            }
+            //TopDown
+            if (_Type2DID == 1)
+            {
+                groundCube.transform.localScale = new Vector3(100, 100, 1);
+                groundCube.transform.position = new Vector3(0, 0, 1);
             }
         }
     }
