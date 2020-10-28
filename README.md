@@ -20,12 +20,15 @@ Trello: https://trello.com/b/lfyU2css/unitypresets
 - [SceneAtmosphereEditor.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/SceneAtmosphereEditor.cs)
 - [Tool_CreateHexagonGrid.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_CreateHexagonGrid.cs) 
 - [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_QuickStart.cs)
+- [Tool_TerrainGenerator.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_TerrainGenerator.cs)
 
 ## Saving / Loading Data
 - [SaveLoad_JSON.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_JSON.cs)
 
 ## Useful
+- [AudioHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/AudioHandler.cs)
 - [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/DoEvent.cs)
+- [Health.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/Health.cs)
 - [LightEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LightEffects.cs)
 - [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
 - [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
