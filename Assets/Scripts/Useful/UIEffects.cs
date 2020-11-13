@@ -7,7 +7,7 @@ public class UIEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     private enum UIEffectOptions { Grow, Shrink }
     [SerializeField] private UIEffectOptions _UIEffect = UIEffectOptions.Grow;
-    [SerializeField] private Vector3 _MinDefaultMaxSize = new Vector3(0.9f, 1f, 1.1f);
+    [SerializeField] private Vector3 _MinDefaultMaxSize = new Vector3(0.9f,1f,1.1f);
     [SerializeField] private float _IncreaseSpeed = 1;
 
     private Vector3 _OriginalSize;
