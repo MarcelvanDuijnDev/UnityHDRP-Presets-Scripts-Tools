@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
@@ -17,7 +16,7 @@ public class SceneAtmosphereEditor : EditorWindow
     bool sceneSettingsFO = false;
     bool lightProfileSettingsFO = false;
 
-    int sortMode = 0; //0 == Name / 1 == Type
+    //int sortMode = 0; //0 == Name / 1 == Type
 
     Color defautGuiColor;
 
