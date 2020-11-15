@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
-public class SceneAtmosphereEditor : EditorWindow
+public class Tool_Atmosphere : EditorWindow
 {
     LightingSettings lightingSettingsProfile;
     SceneAtmosphereEditor_Light lightData = new SceneAtmosphereEditor_Light();
@@ -25,7 +25,7 @@ public class SceneAtmosphereEditor : EditorWindow
     [MenuItem("Tools/Atmosphere")]
     public static void ShowWindow()
     {
-        EditorWindow.GetWindow(typeof(SceneAtmosphereEditor));
+        EditorWindow.GetWindow(typeof(Tool_Atmosphere));
     }
 
     void OnGUI()
