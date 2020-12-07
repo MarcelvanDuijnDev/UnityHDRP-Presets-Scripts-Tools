@@ -15,6 +15,7 @@ public class Tool_QuickStart : EditorWindow
 {
     private int _MenuID = 0;        // QuickStart/Scripts
     private int _DimensionID = 0;   // 2D/3D
+    private int _WithUI = 0;
     private int _Type2DID = 0;      // Platformer/TopDown/VisualNovel
     private int _Type3DID = 0;      // FPS/ThirdPerson/TopDown/Platformer
 
@@ -45,6 +46,7 @@ public class Tool_QuickStart : EditorWindow
 "SaveLoad_JSON",
 "SaveLoad_XML",
 "ScriptebleGameObject",
+"SettingsHandler",
 "Shooting",
 "ShootingRayCast",
 "StringFormats",
@@ -81,6 +83,7 @@ public class Tool_QuickStart : EditorWindow
         "using System.Collections.Generic;\n using System.IO;\n using UnityEngine;\n  public class SaveLoad_JSON : MonoBehaviour {     private Json_SaveData _SaveData = new Json_SaveData();\n      void Start()     {         LoadData();\n     }\n      public void SaveData()     {         string jsonData = JsonUtility.ToJson(_SaveData, true);\n         File.WriteAllText(Application.persistentDataPath + \"/SaveData.json\", jsonData);\n     }\n     public void LoadData()     {         try         {             string dataAsJson = File.ReadAllText(Application.persistentDataPath + \"/SaveData.json\");\n             _SaveData = JsonUtility.FromJson<Json_SaveData>(dataAsJson);\n         }\n         catch         {             SaveData();\n         }\n     }\n     public Json_SaveData GetSaveData()     {         return _SaveData;\n     }\n     public void CreateNewSave()     {         Json_ExampleData newsave = new Json_ExampleData();\n         newsave.exampleValue = 10;\n         _SaveData.saveData.Add(newsave);\n     }\n }\n  [System.Serializable] public class Json_SaveData {     public List <Json_ExampleData> saveData = new List<Json_ExampleData>();\n }\n [System.Serializable] public class Json_ExampleData {     public float exampleValue = 0;\n }",
         "using System.Collections;\n using System.Collections.Generic;\n using UnityEngine;\n using System.Xml.Serialization;\n using System.IO;\n  public class SaveLoad_XML : MonoBehaviour {     private XML_SaveData _SaveData = new XML_SaveData();\n      void Start()     {         LoadData();\n     }\n      public void SaveData()     {         XmlSerializer serializer = new XmlSerializer(typeof(XML_SaveData));\n          using (FileStream stream = new FileStream(Application.persistentDataPath + \"/SaveData.xml\", FileMode.Create))         {             serializer.Serialize(stream, _SaveData);\n         }\n     }\n      public void LoadData()     {         try         {             XmlSerializer serializer = new XmlSerializer(typeof(XML_SaveData));\n              using (FileStream stream = new FileStream(Application.persistentDataPath + \"/SaveData.xml\", FileMode.Open))             {                 _SaveData = serializer.Deserialize(stream) as XML_SaveData;\n             }\n         }\n         catch         {             SaveData();\n         }\n     }\n      public XML_SaveData GetSaveData()     {         return _SaveData;\n     }\n     public void CreateNewSave()     {         XML_ExampleData newsave = new XML_ExampleData();\n         newsave.exampleValue = 10;\n         _SaveData.saveData.Add(newsave);\n     }\n }\n  [System.Serializable] public class XML_SaveData {     public List<XML_ExampleData> saveData = new List<XML_ExampleData>();\n }\n [System.Serializable] public class XML_ExampleData {     public float exampleValue = 0;\n }",
         "using System.Collections;\n using System.Collections.Generic;\n using UnityEngine;\n  [CreateAssetMenu(fileName = \"Example\", menuName = \"SO/ExampleSO\", order = 1)] public class ScriptebleGameObject : ScriptableObject {     public string examplestring;\n     public int exampleint;\n }",
+        "using System.Collections;\n using System.Collections.Generic;\n using UnityEngine;\n using TMPro;\n using UnityEngine.Audio;\n using UnityEngine.UI;\n using System;\n  public class SettingsHandler : MonoBehaviour {     [SerializeField] private AudioMixer _AudioMixer;\n     [SerializeField] private float _Current_Volume;\n       [SerializeField] private TMP_Dropdown _Dropdown_Resolution;\n     [SerializeField] private TMP_Dropdown _Dropdown_Quality;\n     [SerializeField] private TMP_Dropdown _Dropdown_Texture;\n     [SerializeField] private TMP_Dropdown _Dropdown_AA;\n     [SerializeField] private Slider _Slider_Volume;\n      [SerializeField] private Resolution[] _Resolutions;\n      private void Start()     {         _Resolutions = Screen.resolutions;\n         _Dropdown_Resolution.ClearOptions();\n         List<string> options = new List<string>();\n          int currentresid = 0;\n         for (int i = 0;\n i < _Resolutions.Length;\n i++)         {             string option = _Resolutions[i].width + \" x \" + _Resolutions[i].height;\n             options.Add(option);\n              if (_Resolutions[i].width == Screen.currentResolution.width && _Resolutions[i].height == Screen.currentResolution.height)                 currentresid = i;\n         }\n          _Dropdown_Resolution.AddOptions(options);\n         _Dropdown_Resolution.value = currentresid;\n         _Dropdown_Resolution.RefreshShownValue();\n     }\n      // [Display]     //Resolution     \npublic void Set_Resolution(int resid)     {         Resolution resolution = _Resolutions[resid];\n         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);\n     }\n      //FullScreen     \npublic void Set_FullScreen(bool isFullscreen)     {         Screen.fullScreen = isFullscreen;\n     }\n      //Quiality     \npublic void Set_Quality(int qualityid)     {         if (qualityid != 6) // \nif the user is not using                                 //any of the presets             QualitySettings.SetQualityLevel(qualityid);\n         \nswitch (qualityid)         {             case 0: // quality level - very low                 _Dropdown_Texture.value = 3;\n                 _Dropdown_AA.value = 0;\n                 break;\n             \ncase 1: // quality level - low                 _Dropdown_Texture.value = 2;\n                 _Dropdown_AA.value = 0;\n                 break;\n             \ncase 2: // quality level - medium                 _Dropdown_Texture.value = 1;\n                 _Dropdown_AA.value = 0;\n                 break;\n             \ncase 3: // quality level - high                 _Dropdown_Texture.value = 0;\n                 _Dropdown_AA.value = 0;\n                 break;\n             \ncase 4: // quality level - very high                 _Dropdown_Texture.value = 0;\n                 _Dropdown_AA.value = 1;\n                 break;\n             \ncase 5: // quality level - ultra                 _Dropdown_Texture.value = 0;\n                 _Dropdown_AA.value = 2;\n                 break;\n         }\n          _Dropdown_Quality.value = qualityid;\n     }\n      //Vsync     //MaxFOS     //Gama      // [Grapics]     //Antialiasing     \npublic void SetAntiAliasing(int aaid)     {         QualitySettings.antiAliasing = aaid;\n         _Dropdown_Quality.value = 6;\n     }\n      //Shadows     //ViewDistance     //TextureQuality     \npublic void Set_TextureQuality(int textureid)     {         QualitySettings.masterTextureLimit = textureid;\n         _Dropdown_Quality.value = 6;\n     }\n      //ViolageDistance     //ViolageDensity      // [Gameplay]     //SoundAll     \npublic void Set_Volume(float volume)     {         _AudioMixer.SetFloat(\"Volume\", volume);\n         _Current_Volume = volume;\n     }\n      //SoundEffects     //Music        // Quit / Save / Load     \npublic void ExitGame()     {         Application.Quit();\n     }\n     public void SaveSettings()     {         PlayerPrefs.SetInt(\"QualitySettingPreference\",                    _Dropdown_Quality.value);\n         PlayerPrefs.SetInt(\"ResolutionPreference\",                    _Dropdown_Resolution.value);\n         PlayerPrefs.SetInt(\"TextureQualityPreference\",                    _Dropdown_Texture.value);\n         PlayerPrefs.SetInt(\"AntiAliasingPreference\",                    _Dropdown_AA.value);\n         PlayerPrefs.SetInt(\"FullscreenPreference\",                    Convert.ToInt32(Screen.fullScreen));\n         PlayerPrefs.SetFloat(\"VolumePreference\",                    _Current_Volume);\n     }\n     public void LoadSettings(int currentResolutionIndex)     {         if (PlayerPrefs.HasKey(\"QualitySettingPreference\"))             _Dropdown_Quality.value =                          PlayerPrefs.GetInt(\"QualitySettingPreference\");\n         else             _Dropdown_Quality.value = 3;\n         if (PlayerPrefs.HasKey(\"ResolutionPreference\"))             _Dropdown_Resolution.value =                          PlayerPrefs.GetInt(\"ResolutionPreference\");\n         else             _Dropdown_Resolution.value = currentResolutionIndex;\n         if (PlayerPrefs.HasKey(\"TextureQualityPreference\"))             _Dropdown_Texture.value =                          PlayerPrefs.GetInt(\"TextureQualityPreference\");\n         else             _Dropdown_Texture.value = 0;\n         if (PlayerPrefs.HasKey(\"AntiAliasingPreference\"))             _Dropdown_AA.value =                          PlayerPrefs.GetInt(\"AntiAliasingPreference\");\n         else             _Dropdown_AA.value = 1;\n         if (PlayerPrefs.HasKey(\"FullscreenPreference\"))             Screen.fullScreen =             Convert.ToBoolean(PlayerPrefs.GetInt(\"FullscreenPreference\"));\n         else             Screen.fullScreen = true;\n         if (PlayerPrefs.HasKey(\"VolumePreference\"))             _Slider_Volume.value =                         PlayerPrefs.GetFloat(\"VolumePreference\");\n         else             _Slider_Volume.value =                         PlayerPrefs.GetFloat(\"VolumePreference\");\n     }\n       //Set     \npublic void SetDropDown_Resolution(TMP_Dropdown resolutions)     {         _Dropdown_Resolution = resolutions;\n     }\n     public void SetDropDown_Quality(TMP_Dropdown quality)     {         _Dropdown_Quality = quality;\n     }\n     public void SetDropDown_TextureQuality(TMP_Dropdown texturequality)     {         _Dropdown_Texture = texturequality;\n     }\n     public void SetDropDown_AA(TMP_Dropdown aa)     {         _Dropdown_AA = aa;\n     }\n     public void SetSlider_VolumeSlider(Slider volumeslider)     {         _Slider_Volume = volumeslider;\n     }\n }\n ",
         "using System.Collections;\n using System.Collections.Generic;\n using UnityEngine;\n  public class Shooting : MonoBehaviour {     [Header(\"Settings\")]\n     [SerializeField] ObjectPool _ObjectPool = null;\n     [SerializeField] private GameObject _BulletPrefab = null;\n     [SerializeField] private GameObject _ShootPoint = null;\n      [Header(\"Semi\")]\n     [SerializeField] private int _SemiAutomaticBulletAmount = 3;\n     [SerializeField] private float _SemiShootSpeed = 0.2f;\n     [Header(\"Automatic\")]\n     [SerializeField] private float _SecondsBetweenShots = 0.5f;\n      private enum ShootModes { SingleShot, SemiAutomatic, Automatic }\n     [SerializeField] private ShootModes _ShootMode = ShootModes.SingleShot;\n      private bool _CheckSingleShot;\n     private float _Timer;\n     private bool _LockShooting;\n      void Update()     {         if (Input.GetMouseButton(0))         {             switch (_ShootMode)             {                 case ShootModes.SingleShot:                     if (!_CheckSingleShot)                         Shoot();\n                     _CheckSingleShot = true;\n                     break;\n                 case ShootModes.SemiAutomatic:                     if (!_CheckSingleShot && !_LockShooting)                         StartCoroutine(SemiShot());\n                     _CheckSingleShot = true;\n                     break;\n                 case ShootModes.Automatic:                     _Timer += 1 * Time.deltaTime;\n                     if (_Timer >= _SecondsBetweenShots)                     {                         Shoot();\n                         _Timer = 0;\n                     }\n                     break;\n             }\n         }\n         if (Input.GetMouseButtonUp(0))         {             _CheckSingleShot = false;\n         }\n     }\n      IEnumerator SemiShot()     {         _LockShooting = true;\n         for (int i = 0;\n i < _SemiAutomaticBulletAmount;\n i++)         {             Shoot();\n             yield return new WaitForSeconds(_SemiShootSpeed);\n         }\n         _LockShooting = false;\n     }\n      void Shoot()     {        GameObject bullet = _ObjectPool.GetObject(_BulletPrefab, true);\n         bullet.SetActive(true);\n         bullet.transform.position = _ShootPoint.transform.position;\n         bullet.transform.rotation = _ShootPoint.transform.rotation;\n     }\n }\n ",
         "using System.Collections;\n using System.Collections.Generic;\n using System.Threading;\n using UnityEngine;\n  public class ShootingRayCast : MonoBehaviour {     [Header(\"Settings\")]\n     [SerializeField] private float _Damage = 20;\n     [SerializeField] private float _ShootDistance = 50;\n     [SerializeField] private string _EnemyTag = \"Enemy\";\n      [Header(\"Semi\")]\n     [SerializeField] private int _SemiAutomaticBulletAmount = 3;\n     [SerializeField] private float _SemiShootSpeed = 0.2f;\n     [Header(\"Automatic\")]\n     [SerializeField] private float _SecondsBetweenShots = 0.5f;\n      private enum ShootModes {SingleShot, SemiAutomatic, Automatic }\n     [SerializeField] private ShootModes _ShootMode = ShootModes.SingleShot;\n      private bool _CheckSingleShot;\n     private float _Timer;\n     private bool _LockShooting;\n      void Update()     {         if (Input.GetMouseButton(0))         {             switch (_ShootMode)             {                 case ShootModes.SingleShot:                     if (!_CheckSingleShot)                         Shoot();\n                     _CheckSingleShot = true;\n                     break;\n                 case ShootModes.SemiAutomatic:                     if (!_CheckSingleShot && !_LockShooting)                         StartCoroutine(SemiShot());\n                     _CheckSingleShot = true;\n                     break;\n                 case ShootModes.Automatic:                     _Timer += 1 * Time.deltaTime;\n                     if(_Timer >= _SecondsBetweenShots)                     {                         Shoot();\n                         _Timer = 0;\n                     }\n                     break;\n             }\n         }\n         if(Input.GetMouseButtonUp(0))         {             _CheckSingleShot = false;\n         }\n     }\n      IEnumerator SemiShot()     {         _LockShooting = true;\n         for (int i = 0;\n i < _SemiAutomaticBulletAmount;\n i++)         {             Shoot();\n             yield return new WaitForSeconds(_SemiShootSpeed);\n         }\n         _LockShooting = false;\n     }\n      void Shoot()     {         RaycastHit hit;\n         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _ShootDistance))             if (hit.transform.tag == _EnemyTag)             {                 hit.transform.GetComponent<Health>().DoDamage(_Damage);\n             }\n     }\n }",
         "using System.Collections;\n using System.Collections.Generic;\n using UnityEngine;\n using TMPro;\n  public class StringFormats : MonoBehaviour {     private enum FormatOptions {DigitalTime }\n;\n     [SerializeField] private FormatOptions _FormatOption = FormatOptions.DigitalTime;\n     [SerializeField] private TextMeshProUGUI _ExampleText = null;\n      private float _Timer;\n      void Update()     {         _Timer += 1 * Time.deltaTime;\n          switch (_FormatOption)         {             case FormatOptions.DigitalTime:                 _ExampleText.text = string.Format(\"{0:00}:{1:00}:{2:00}\", Mathf.Floor(_Timer / 3600), Mathf.Floor((_Timer / 60) % 60), _Timer % 60);\n                 break;\n}\n     }\n }\n",
@@ -116,6 +119,7 @@ public class Tool_QuickStart : EditorWindow
         "save_load_json",
         "save_load_xml",
         "scripteble_gameobject",
+        "",
         "shooting",
         "shooting_raycast",
         "string_format",
@@ -191,6 +195,7 @@ public class Tool_QuickStart : EditorWindow
     {
         //Dimension
         _DimensionID = GUILayout.Toolbar(_DimensionID, new string[] { "2D", "3D" });
+        _WithUI = GUILayout.Toolbar(_WithUI, new string[] { "No UI", "UI All", "UI Menu", "UI HUD" });
 
         //Type 2D/3D
         switch (_DimensionID)
@@ -714,6 +719,25 @@ public class Tool_QuickStart : EditorWindow
         {
             case 0:
                 CreateUI_Default();
+                //CreateUI_HUD();
+                break;
+        }
+
+        Set_SettingsHandler();
+    }
+
+    void CreateUIOptions()
+    {
+        switch(_Options_Style)
+        {
+            case 0: //All
+
+                break;
+            case 1: //Menu
+
+                break;
+            case 2: //HUD
+
                 break;
         }
     }
@@ -742,6 +766,19 @@ public class Tool_QuickStart : EditorWindow
 
         _CreatedCanvas = canvasobj;
     }
+    void CreateUI_HUD()
+    {
+        GameObject hudobj = new GameObject();
+        RectTransform hudobjrect = hudobj.AddComponent<RectTransform>();
+        SetRect(hudobjrect, "bottomleft");
+        hudobj.name = "HUD";
+
+
+    }
+    void CreateUI_PauzeMenu()
+    {
+
+    }
 
     GameObject CreateCanvas()
     {
@@ -756,7 +793,7 @@ public class Tool_QuickStart : EditorWindow
         if (GameObject.Find("EventSystem") == null)
         {
             GameObject eventsystemobj = new GameObject();
-            eventsystemobj.name = "EventSytem";
+            eventsystemobj.name = "EventSystem";
             eventsystemobj.AddComponent<EventSystem>();
             eventsystemobj.AddComponent<StandaloneInputModule>();
         }
@@ -811,13 +848,17 @@ public class Tool_QuickStart : EditorWindow
     {
         //Create objects
         GameObject dropdownobj = new GameObject();
-        GameObject dropdown_label = Create_Text(dropdownobj, "Text_DropDown", pos, size, "Option A", textsize, Color.black);
+        GameObject dropdown_label = new GameObject();
         GameObject dropdown_arrow = new GameObject();
         GameObject dropdown_template = new GameObject();
 
         GameObject dropdown_viewport = new GameObject();
         GameObject dropdown_content = new GameObject();
         GameObject dropdown_item = new GameObject();
+
+        GameObject dropdown_item_background = new GameObject();
+        GameObject dropdown_item_checkmark = new GameObject();
+        GameObject dropdown_item_label = new GameObject();
 
         GameObject dropdown_scrollbar = new GameObject();
         GameObject dropdown_slidingarea = new GameObject();
@@ -832,9 +873,12 @@ public class Tool_QuickStart : EditorWindow
         dropdown_template.name = "Template";
 
         dropdown_viewport.name = "Viewport";
-        dropdown_content.name = "Conten";
-        dropdown_item.name = "Item" +
-            "";
+        dropdown_content.name = "Content";
+        dropdown_item.name = "Item";
+
+        dropdown_item_background.name = "Item Background";
+        dropdown_item_checkmark.name = "Item Checkmark";
+        dropdown_item_label.name = "Item Label";
 
         dropdown_scrollbar.name = "Scrollbar";
         dropdown_slidingarea.name = "Sliding Area";
@@ -842,12 +886,17 @@ public class Tool_QuickStart : EditorWindow
 
         //Add RectTransform
         RectTransform dropdownobjrect = dropdownobj.AddComponent<RectTransform>();
+        RectTransform dropdown_labelrect = dropdown_label.AddComponent<RectTransform>();
         RectTransform dropdown_arrowrect = dropdown_arrow.AddComponent<RectTransform>();
         RectTransform dropdown_templaterect = dropdown_template.AddComponent<RectTransform>();
 
         RectTransform dropdown_viewportrect = dropdown_viewport.AddComponent<RectTransform>();
         RectTransform dropdown_contentrect = dropdown_content.AddComponent<RectTransform>();
         RectTransform dropdown_itemrect = dropdown_item.AddComponent<RectTransform>();
+
+        RectTransform dropdown_item_backgroundrect = dropdown_item_background.AddComponent<RectTransform>();
+        RectTransform dropdown_item_checkmarkrect = dropdown_item_checkmark.AddComponent<RectTransform>();
+        RectTransform dropdown_item_labelrect = dropdown_item_label.AddComponent<RectTransform>();
 
         RectTransform dropdown_scrollbarrect = dropdown_scrollbar.AddComponent<RectTransform>();
         RectTransform dropdown_slidingarearect = dropdown_slidingarea.AddComponent<RectTransform>();
@@ -862,6 +911,10 @@ public class Tool_QuickStart : EditorWindow
         dropdown_content.transform.SetParent(dropdown_viewport.transform);
         dropdown_item.transform.SetParent(dropdown_content.transform);
 
+        dropdown_item_background.transform.SetParent(dropdown_item.transform);
+        dropdown_item_checkmark.transform.SetParent(dropdown_item.transform);
+        dropdown_item_label.transform.SetParent(dropdown_item.transform);
+
         dropdown_scrollbar.transform.SetParent(dropdown_template.transform);
         dropdown_slidingarea.transform.SetParent(dropdown_scrollbar.transform);
         dropdown_handle.transform.SetParent(dropdown_slidingarea.transform);
@@ -874,6 +927,28 @@ public class Tool_QuickStart : EditorWindow
         dropdownimage.type = Image.Type.Sliced;
         TMP_Dropdown dropdowntmp = dropdownobj.AddComponent<TMP_Dropdown>();
         SetRect(dropdownobjrect, anchorpos);
+        List<TMP_Dropdown.OptionData> newoptions = new List<TMP_Dropdown.OptionData>();
+
+        TMP_Dropdown.OptionData option1 = new TMP_Dropdown.OptionData();
+        TMP_Dropdown.OptionData option2 = new TMP_Dropdown.OptionData();
+        TMP_Dropdown.OptionData option3 = new TMP_Dropdown.OptionData();
+
+        option1.text = "Option A";
+        option2.text = "Option B";
+        option3.text = "Option C";
+
+        newoptions.Add(option1);
+        newoptions.Add(option2);
+        newoptions.Add(option3);
+
+        dropdowntmp.AddOptions(newoptions);
+
+        //Set Rect Label
+        dropdown_labelrect.anchorMin = new Vector2(0, 0);
+        dropdown_labelrect.anchorMax = new Vector2(1, 1);
+        dropdown_labelrect.pivot = new Vector2(0.5f, 0.5f);
+        dropdown_labelrect.sizeDelta = new Vector2(25, 6);
+        dropdown_labelrect.anchoredPosition = new Vector4(10, 7);
 
         //Set Rect Arrow
         dropdown_arrowrect.anchorMin = new Vector2(1, 0.5f);
@@ -893,7 +968,7 @@ public class Tool_QuickStart : EditorWindow
         dropdown_viewportrect.anchorMin = new Vector2(0, 0);
         dropdown_viewportrect.anchorMax = new Vector2(1, 1);
         dropdown_viewportrect.pivot = new Vector2(0, 1);
-        dropdown_viewportrect.sizeDelta = new Vector2(18, 0);
+        dropdown_viewportrect.sizeDelta = new Vector2(18, 15); //NotDy
         dropdown_viewportrect.anchoredPosition = new Vector4(0, 0);
 
         //Set Rect Content
@@ -907,8 +982,29 @@ public class Tool_QuickStart : EditorWindow
         dropdown_itemrect.anchorMin = new Vector2(0, 0.5f);
         dropdown_itemrect.anchorMax = new Vector2(1, 0.5f);
         dropdown_itemrect.pivot = new Vector2(0.5f, 0.5f);
-        dropdown_itemrect.sizeDelta = new Vector2(0, 20);
-        dropdown_itemrect.anchoredPosition = new Vector4(0, 0);
+        dropdown_itemrect.sizeDelta = new Vector2(0, size.y);
+        dropdown_itemrect.anchoredPosition = new Vector4(0, -15); //NotDy
+
+        //Set Rect Item Background
+        dropdown_item_backgroundrect.anchorMin = new Vector2(0,0);
+        dropdown_item_backgroundrect.anchorMax = new Vector2(1, 1);
+        dropdown_item_backgroundrect.pivot = new Vector2(0.5f, 0.5f);
+        dropdown_item_backgroundrect.sizeDelta = new Vector2(0, 0);
+        dropdown_item_backgroundrect.anchoredPosition = new Vector4(0, 0);
+
+        //Set Rect Item Checkmark
+        dropdown_item_checkmarkrect.anchorMin = new Vector2(0, 0.5f);
+        dropdown_item_checkmarkrect.anchorMax = new Vector2(0, 0.5f);
+        dropdown_item_checkmarkrect.pivot = new Vector2(0.5f, 0.5f);
+        dropdown_item_checkmarkrect.sizeDelta = new Vector2(20, 20);
+        dropdown_item_checkmarkrect.anchoredPosition = new Vector4(10, 0);
+
+        //Set Rect Item Label
+        dropdown_item_labelrect.anchorMin = new Vector2(0, 0);
+        dropdown_item_labelrect.anchorMax = new Vector2(1, 1);
+        dropdown_item_labelrect.pivot = new Vector2(0.5f, 0.5f);
+        dropdown_item_labelrect.sizeDelta = new Vector2(10, 1);
+        dropdown_item_labelrect.anchoredPosition = new Vector4(20, 2);
 
         //Set Rect Scrollbar
         dropdown_scrollbarrect.anchorMin = new Vector2(1, 0);
@@ -931,8 +1027,78 @@ public class Tool_QuickStart : EditorWindow
         dropdown_handlerect.sizeDelta = new Vector2(-10, -10);
         dropdown_handlerect.anchoredPosition = new Vector4(-10, -10);
 
+        //
+        dropdown_arrow.AddComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/DropdownArrow.psd"); ;
 
+        //
+        dropdowntmp.template = dropdown_templaterect;
+        dropdowntmp.captionText = dropdown_label.GetComponent<TextMeshProUGUI>();
+        dropdowntmp.itemText = dropdown_item_label.GetComponent<TextMeshProUGUI>();
+
+        //handle
+        Image dropdown_handleimage = dropdown_handle.AddComponent<Image>();
+        dropdown_handleimage.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd"); ;
+        dropdown_handleimage.type = Image.Type.Sliced;
+
+        //scrollbar
+        Image dropdown_scrollbarimage = dropdown_scrollbar.AddComponent<Image>();
+        dropdown_scrollbarimage.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Background.psd"); ;
+        dropdown_scrollbarimage.type = Image.Type.Sliced;
+        Scrollbar dropdown_scrollbar_scroll = dropdown_scrollbar.AddComponent<Scrollbar>();
+        dropdown_scrollbar_scroll.targetGraphic = dropdown_handleimage;
+        dropdown_scrollbar_scroll.handleRect = dropdown_handlerect;
+        dropdown_scrollbar_scroll.direction = Scrollbar.Direction.BottomToTop;
+
+        //Template
+        Image dropdown_templateimage = dropdown_template.AddComponent<Image>();
+        dropdown_templateimage.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
+        dropdown_templateimage.type = Image.Type.Sliced;
+        ScrollRect dropdown_templatescrollrect = dropdown_template.AddComponent<ScrollRect>();
+        dropdown_templatescrollrect.content = dropdown_contentrect;
+        dropdown_templatescrollrect.decelerationRate = 0.135f;
+        dropdown_templatescrollrect.scrollSensitivity = 1;
+        dropdown_templatescrollrect.viewport = dropdown_viewportrect;
+        dropdown_templatescrollrect.movementType = ScrollRect.MovementType.Clamped;
+        dropdown_templatescrollrect.verticalScrollbar = dropdown_scrollbar_scroll;
+        dropdown_templatescrollrect.horizontal = false;
+
+        //viewport
+        Mask dropdown_viewportmask = dropdown_viewport.AddComponent<Mask>();
+        Image dropdown_viewportimage = dropdown_viewport.AddComponent<Image>();
+        dropdown_viewportimage.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIMask.psd");
+        dropdown_viewportimage.type = Image.Type.Sliced;
+
+        //Item Background
+        dropdown_item_background.AddComponent<Image>();
+
+        //Item Checkmark
+        dropdown_item_checkmark.AddComponent<Image>().sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Checkmark.psd"); ;
+
+        //Item Label
+        TextMeshProUGUI dropdown_item_labeltmp = dropdown_item_label.AddComponent<TextMeshProUGUI>();
+        dropdown_item_labeltmp.text = "Option A";
+        dropdown_item_labeltmp.color = Color.black;
+
+        //LabelText
+        TextMeshProUGUI dropdown_labeltext = dropdown_label.AddComponent<TextMeshProUGUI>();
+        dropdown_labeltext.alignment = TextAlignmentOptions.MidlineLeft;
+        dropdown_labeltext.color = Color.black;
+        dropdown_labeltext.text = "Option A";
+
+        //Item
+        Toggle dropdown_itemtoggle = dropdown_item.AddComponent<Toggle>();
+        dropdown_itemtoggle.targetGraphic = dropdown_item_background.GetComponent<Image>();
+        dropdown_itemtoggle.graphic = dropdown_item_checkmark.GetComponent<Image>();
+        dropdown_itemtoggle.isOn = true;
+
+        //dropdownobj
+        dropdowntmp.targetGraphic = dropdownimage;
+        dropdowntmp.itemText = dropdown_item_labeltmp;
+
+        //AddToOptions
         dropdownobj.transform.SetParent(parentobj.transform);
+
+        dropdowntmp.captionText = dropdown_labeltext;
 
         return dropdownobj;
     }
@@ -1057,7 +1223,7 @@ public class Tool_QuickStart : EditorWindow
             case "Display":
                 GameObject button_Resolution = Create_Dropdown(tab_new, "Dropdown_Resolution", "Resolution", new Vector2(800, 700), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_Fullscreen = Create_Button(tab_new, "Button_Fullscreen", "Fullscreen", new Vector2(800, 630), new Vector2(500, 60), 10, 40, "bottomleft");
-                GameObject Button_Quality = Create_Button(tab_new, "Button_Quality", "Quality", new Vector2(800, 560), new Vector2(500, 60), 10, 40, "bottomleft");
+                GameObject Button_Quality = Create_Dropdown(tab_new, "Dropdown_Quality", "Quality", new Vector2(800, 560), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_VSync = Create_Button(tab_new, "Button_VSync", "VSync", new Vector2(800, 490), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_MaxFPS = Create_Button(tab_new, "Button_MaxFPS", "MaxFPS", new Vector2(800, 420), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_Gamma = Create_Button(tab_new, "Button_Gamma", "Gamma", new Vector2(800, 350), new Vector2(500, 60), 10, 40, "bottomleft");
@@ -1069,10 +1235,10 @@ public class Tool_QuickStart : EditorWindow
                 // Gamma
                 break;
             case "Graphics":
-                GameObject button_Antialiasing = Create_Button(tab_new, "Button_Antialiasing", "Antialiasing", new Vector2(800, 700), new Vector2(500, 60), 10, 40, "bottomleft");
+                GameObject button_Antialiasing = Create_Dropdown(tab_new, "Dropdown_Antialiasing", "Antialiasing", new Vector2(800, 700), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_Shadows = Create_Button(tab_new, "Button_Shadows", "Shadows", new Vector2(800, 630), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_ViewDistance = Create_Button(tab_new, "Button_ViewDistance", "ViewDistance", new Vector2(800, 560), new Vector2(500, 60), 10, 40, "bottomleft");
-                GameObject Button_TextureQuality = Create_Button(tab_new, "Button_TextureQuality", "TextureQuality", new Vector2(800, 490), new Vector2(500, 60), 10, 40, "bottomleft");
+                GameObject Button_TextureQuality = Create_Button(tab_new, "Dropdown_TextureQuality", "TextureQuality", new Vector2(800, 490), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_ViolageDistance = Create_Button(tab_new, "Button_ViolageDistance", "ViolageDistance", new Vector2(800, 420), new Vector2(500, 60), 10, 40, "bottomleft");
                 GameObject Button_ViolageDensity = Create_Button(tab_new, "Button_ViolageDensity", "ViolageDensity", new Vector2(800, 350), new Vector2(500, 60), 10, 40, "bottomleft");
                 // Antialiasing
@@ -1151,6 +1317,57 @@ public class Tool_QuickStart : EditorWindow
                 rect.anchorMax = new Vector2(0.5f, 0.5f);
                 rect.pivot = new Vector2(0.5f, 0.5f);
                 break;
+        }
+    }
+
+
+    void Set_SettingsHandler()
+    {
+        if (ScriptExist("SettingsHandler"))
+        {
+            string UniType = "SettingsHandler";
+            Type UnityType = Type.GetType(UniType + ", Assembly-CSharp");
+            GameObject settingshandlerobj = new GameObject();
+            settingshandlerobj.AddComponent(UnityType);
+
+            TMP_Dropdown[] dropdowns = Resources.FindObjectsOfTypeAll<TMP_Dropdown>();
+
+            for (int i = 0; i < dropdowns.Length; i++)
+            {
+                if(dropdowns[i].name == "Dropdown_Resolution")
+                {
+                    settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_Resolution", dropdowns[i]);
+                }
+                if (dropdowns[i].name == "Dropdown_Quality")
+                {
+                    settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_Quality", dropdowns[i]);
+                }
+                if (dropdowns[i].name == "Dropdown_Antialiasing")
+                {
+                    settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_AA", dropdowns[i]);
+                }
+                if (dropdowns[i].name == "Dropdown_TextureQuality")
+                {
+                    settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_TextureQuality", dropdowns[i]);
+                }
+            }
+
+            /*
+            TMP_Dropdown resolution = Resources.FindObjectsOfTypeAll<TMP_Dropdown>(); //GameObject.Find("Dropdown_Resolution").GetComponent<TMP_Dropdown>();
+            TMP_Dropdown quality = GameObject.Find("").GetComponent<TMP_Dropdown>();
+            TMP_Dropdown texturequality = GameObject.Find("").GetComponent<TMP_Dropdown>();
+            TMP_Dropdown aa = GameObject.Find("").GetComponent<TMP_Dropdown>();
+            Slider volumeslider = GameObject.Find("").GetComponent<Slider>();
+
+            
+            settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_Quality", quality);
+            settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_TextureQuality", texturequality);
+            settingshandlerobj.GetComponent(UnityType).SendMessage("SetDropDown_AA", aa);
+
+            settingshandlerobj.GetComponent(UnityType).SendMessage("SetSlider_VolumeSlider", volumeslider);
+            */
+
+            settingshandlerobj.name = "SettingsHandler";
         }
     }
 }
