@@ -55,6 +55,7 @@ Feel free to use/copy files from this project._
 - [Health.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/Health.cs)
 - [LightEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LightEffects.cs)
 - [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
+- [MenuHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/MenuHandler.cs)
 - [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
 - [ObjectPoolSimple.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPoolSimple.cs)
 - [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/OnCollision.cs)
