@@ -81,7 +81,7 @@ Feel free to use/copy files from this project._
 - [Rotation.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/Rotation.cs)
 
 # Other
-- [MVD_Namespace.cs]
+- [MVD_Namespace.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Other/MVD_Namespace.cs)
 
 # License & Copyright
 Licensed under the [MIT License](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/LICENSE)
