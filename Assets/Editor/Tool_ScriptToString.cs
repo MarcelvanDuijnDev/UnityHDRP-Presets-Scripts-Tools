@@ -9,6 +9,11 @@ public class Tool_ScriptToString : EditorWindow
     string _ScriptInput = "";
     string _ScriptOutput = "";
 
+    List<string> _CustomCommandCheckKeywords = new List<string>();
+    string _CustomCommandCheck;
+
+    private Vector2 _ScrollPos = new Vector2();
+
     [MenuItem("Tools/Convert Script to String")]
     public static void ShowWindow()
     {
@@ -17,19 +22,113 @@ public class Tool_ScriptToString : EditorWindow
 
     void OnGUI()
     {
+        if (GUILayout.Button("Convert", GUILayout.Height(30)))
+            _ScriptOutput = ConvertScriptToString();
+
+        Display_InputOutput();
+        Display_TextEditor();
+    }
+
+    private void Display_InputOutput()
+    {
+        GUILayout.Space(20);
         //Input
-        GUILayout.Label("Paste script here: ", EditorStyles.boldLabel);
+        GUILayout.Label("Input: ", EditorStyles.boldLabel);
         _ScriptInput = EditorGUILayout.TextField("", _ScriptInput);
 
         //Output
-        GUILayout.Label("Converted to string: ", EditorStyles.boldLabel);
+        GUILayout.Label("Output: ", EditorStyles.boldLabel);
         EditorGUILayout.TextField("", _ScriptOutput);
+        GUILayout.Space(20);
+    }
 
-        //Convert
-        if (GUILayout.Button("Convert"))
+    private void Display_TextEditor()
+    {
+        //TextEditor Info
+        GUILayout.Label("Use Custom Keywords to fix lines that should not be included into the commend. \n" +
+            "Sometimes it leaves code after the command, you can addit it by adding a keyword below." +
+            "The x on the left shows the lines that contain a comment.");
+        GUILayout.Space(20);
+
+        //TextEditor
+        GUILayout.Label("Custom Keywords: ", EditorStyles.boldLabel);
+        _CustomCommandCheck = EditorGUILayout.TextField("", _CustomCommandCheck);
+        if (GUILayout.Button("AddKeyword"))
         {
-            _ScriptOutput = ConvertScriptToString();
+            if (_CustomCommandCheck == "")
+                Debug.Log("Enter a keyword");
+            else
+            {
+                _CustomCommandCheckKeywords.Add(_CustomCommandCheck);
+                _CustomCommandCheck = "";
+                _ScriptOutput = ConvertScriptToString();
+            }
         }
+        for (int i = 0; i < _CustomCommandCheckKeywords.Count; i++)
+        {
+            GUILayout.BeginHorizontal("box");
+            GUILayout.Label(_CustomCommandCheckKeywords[i]);
+            if (GUILayout.Button("Remove", GUILayout.Width(100)))
+            {
+                _CustomCommandCheckKeywords.RemoveAt(i);
+                _CustomCommandCheck = "";
+                _ScriptOutput = ConvertScriptToString();
+            }
+            GUILayout.EndHorizontal();
+        }
+
+        //Preview
+        List<string> output = new List<string>();
+        List<string> output2 = new List<string>();
+
+        for (int i = 0; i < _ScriptOutput.Length; i++)
+        {
+            output.Add(System.Convert.ToString(_ScriptOutput[i]));
+        }
+
+        int begincalc = 0;
+        int endcalc = 0;
+
+        for (int i = 0; i < output.Count; i++)
+        {
+            if (i + 1 < output.Count)
+            {
+                if (output[i] + output[i + 1] == "\\n")
+                {
+                    endcalc = i;
+                    string addstring = "";
+                    for (int j = 0; j < endcalc - begincalc; j++)
+                    {
+                        addstring += output[begincalc + j];
+                    }
+                    addstring += output[endcalc] + output[endcalc + 1];
+
+                    output2.Add(addstring);
+                    endcalc = endcalc + 1;
+                    begincalc = endcalc + 1;
+                }
+            }
+        }
+
+        _ScrollPos = EditorGUILayout.BeginScrollView(_ScrollPos);
+
+        for (int i = 0; i < output2.Count; i++)
+        {
+            GUILayout.BeginHorizontal();
+            if (output2[i].Contains("//"))
+            {
+                EditorGUILayout.TextField("", "x", GUILayout.MaxWidth(15));
+            }
+            else
+            {
+                EditorGUILayout.TextField("", "", GUILayout.MaxWidth(15));
+            }
+
+            EditorGUILayout.TextField("", output2[i]);
+            GUILayout.EndHorizontal();
+        }
+
+        EditorGUILayout.EndScrollView();
     }
 
     private string ConvertScriptToString()
@@ -46,6 +145,7 @@ public class Tool_ScriptToString : EditorWindow
         }
 
         bool headercheck = false;
+        bool forcheck = false;
         bool commentcheck = false;
 
         for (int i = 0; i < textedit.Count; i++)
@@ -57,7 +157,16 @@ public class Tool_ScriptToString : EditorWindow
                     headercheck = true;
             }
 
-            // Comment check
+            //For check
+            if(i + 2 < textedit.Count)
+            {
+                if(textedit[i] + textedit[i+1] + textedit[i + 2] == "for")
+                {
+                    forcheck = true;
+                }
+            }
+
+            //Comment check
             if (i + 1 < textedit.Count)
             {
                 if (textedit[i] + textedit[i + 1] == "//" || textedit[i] + textedit[i + 1] == "/*")
@@ -77,6 +186,12 @@ public class Tool_ScriptToString : EditorWindow
                 {
                     //if
                     if (textedit[i] + textedit[i + 1] == "if")
+                    {
+                        scriptasstring += "\\n";
+                        commentcheck = false;
+                    }
+                    //for
+                    if (textedit[i] + textedit[i + 1] + textedit[i + 2] == "for")
                     {
                         scriptasstring += "\\n";
                         commentcheck = false;
@@ -112,6 +227,25 @@ public class Tool_ScriptToString : EditorWindow
                         commentcheck = false;
                     }
                 }
+
+                for (int j = 0; j < _CustomCommandCheckKeywords.Count; j++)
+                {
+                    if(_CustomCommandCheckKeywords[j].Length < textedit.Count)
+                    {
+                        string check = "";
+
+                        for (int o = 0; o < _CustomCommandCheckKeywords[j].Length; o++)
+                        {
+                            check += textedit[i + o];
+                        }
+                        
+                        if(check == _CustomCommandCheckKeywords[j])
+                        {
+                            scriptasstring += "\\n";
+                            commentcheck = false;
+                        }
+                    }
+                }
             }
 
             scriptasstring += textedit[i];
@@ -128,7 +262,7 @@ public class Tool_ScriptToString : EditorWindow
                 {
                     scriptasstring += "\\n";
                 }
-                if (textedit[i] == ";")
+                if (textedit[i] == ";" && !forcheck)
                 {
                     scriptasstring += "\\n";
                 }
@@ -137,11 +271,12 @@ public class Tool_ScriptToString : EditorWindow
                     scriptasstring += "\\n";
                     headercheck = false;
                 }
+                if (textedit[i] == ")" && forcheck)
+                {
+                    scriptasstring += "\\n";
+                    forcheck = false;
+                }
             }
-
-
-
-
         }
 
         scriptasstring += "\"";
