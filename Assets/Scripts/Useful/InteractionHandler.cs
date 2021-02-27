@@ -30,11 +30,11 @@ public class InteractionHandler : MonoBehaviour
     private bool _Interacting;
     private bool _Previewing;
 
-    private Movement_CC _CCS; //Script that handles rotation
+    private Movement_CC_FirstPerson _CCS; //Script that handles rotation
 
     void Start()
     {
-        _CCS = GetComponent<Movement_CC>();
+        _CCS = GetComponent<Movement_CC_FirstPerson>();
         _PickupPointPosition.z = _PickupMinMaxRange.x;
     }
 
@@ -49,6 +49,7 @@ public class InteractionHandler : MonoBehaviour
                 Debug.DrawRay(_Head.position, _Head.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
 
                 _ActiveObject = hit.transform.gameObject;
+
                 _Cursor.color = Color.white;
             }
             else
