@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class OnCollision : MonoBehaviour
 {
-    private enum Options {OnTriggerEnter, OnTriggerExit, OnTriggerStay, OnCollisionEnter, OnCollisionExit, OnCollisionStay};
+    private enum Options {OnTriggerEnter, OnTriggerExit, OnTriggerStay, OnCollisionEnter, OnCollisionExit, OnCollisionStay, OnAll};
     [SerializeField] private LayerMask _LayerMask = ~0;
-    [SerializeField] private Options _Option = Options.OnTriggerEnter;
+    [SerializeField] private Options _Option = Options.OnAll;
     [SerializeField] private string _Tag = "";
     [SerializeField] private UnityEvent _Event = null;
 
@@ -34,32 +34,32 @@ public class OnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_Option == Options.OnTriggerEnter)
+        if (_Option == Options.OnTriggerEnter || _Option == Options.OnAll)
             Action(other);
     }
     private void OnTriggerExit(Collider other)
     {
-        if (_Option == Options.OnTriggerExit)
+        if (_Option == Options.OnTriggerExit || _Option == Options.OnAll)
             Action(other);
     }
     private void OnTriggerStay(Collider other)
     {
-        if (_Option == Options.OnTriggerStay)
+        if (_Option == Options.OnTriggerStay || _Option == Options.OnAll)
             Action(other);
     }
-    void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (_Option == Options.OnCollisionEnter)
+        if (_Option == Options.OnCollisionEnter || _Option == Options.OnAll)
             Action(other);
     }
-    void OnCollisionExit(Collision other)
+    private void OnCollisionExit(Collision other)
     {
-        if (_Option == Options.OnCollisionExit)
+        if (_Option == Options.OnCollisionExit || _Option == Options.OnAll)
             Action(other);
     }
-    void OnCollisionStay(Collision other)
+    private void OnCollisionStay(Collision other)
     {
-        if (_Option == Options.OnCollisionStay)
+        if (_Option == Options.OnCollisionStay || _Option == Options.OnAll)
             Action(other);
     }
 }
