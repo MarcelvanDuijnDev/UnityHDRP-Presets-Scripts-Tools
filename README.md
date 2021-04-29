@@ -83,6 +83,7 @@ Feel free to use/copy files from this project._
 - [DontDestroy.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/DontDestroy.cs)
 - [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/DoEvent.cs)
 - [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/OnCollision.cs)
+- [OnCollision2D.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/OnCollision2D.cs)
 - [PosToPos.csw](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/PosToPos.cs)
 - [Rotation.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/Rotation.cs)
 
