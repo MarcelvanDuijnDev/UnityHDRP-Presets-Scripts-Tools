@@ -13,13 +13,16 @@ using TMPro;
 
 public class Tool_QuickStart : EditorWindow
 {
-    //Navigation
-    int _WindowID = 0;      // Default/FileFinder/ScriptToString/MapEditor
+    //Navigation Tool
     int _MenuID = 0;        // QuickStart/Scripts/QuickUI
     int _DimensionID = 0;   // 2D/3D
     int _Type2DID = 0;      // Platformer/TopDown/VisualNovel
     int _Type3DID = 0;      // FPS/ThirdPerson/TopDown/Platformer
     bool _SelectWindow = false;
+
+    //Navigation Tool Windows
+    int _WindowID = 0;      // Default/FileFinder/ScriptToString/MapEditor
+    string[] _WindowNames = new string[] {"Home","FileFinder","ScriptToString","MapEditor" };
 
     //Scripts
     Tool_QuickStart_Script[] QuickStart_Scripts = new Tool_QuickStart_Script[] {
@@ -80,6 +83,7 @@ public class Tool_QuickStart : EditorWindow
     //Search
     string _Search_Script = "";
     string _Search_Tag = "";
+    string _Search_Window = ""; 
     string[] _Project_Scripts = new string[0];
     bool _Search_QuickStartScripts_Toggle = true;
     bool _Searcg_ProjectScripts_Toggle = false;
@@ -104,64 +108,86 @@ public class Tool_QuickStart : EditorWindow
     RectTransform _MainCanvasRect;
     Vector2 _CheckMainCanvasRectSize;
 
-    //FileFinder (FF)
+    //Tool Mode
+    int _ToolState = 0;
+    int _ToolStateCheck = 1;
+
+    //FileFinder (FF) ----------------------------------------------
+    #region FileFinder
     string _FF_Type = "";
     string _FF_Search = "";
+    string _FF_SearchCheck = "a";
     int _FF_Results = 0;
     int _FF_Total = 0;
 
-    //Script To String (STS)
+    //Scene
+    string _FF_Scene_Search = "";
+    bool _FF_Scene_InsceneInfo = false;
+    GameObject[] _FF_Scene_Objects = new GameObject[0];
+
+    //Results
+    string[] _FF_SearchResults = new string[0];
+    string[] _FF_SearchResultsChange = new string[0];
+    #endregion
+
+
+    //Script To String (STS) ----------------------------------------------
+    #region Script To String
     string _STS_ScriptInput = "";
     string _STS_ScriptOutput = "";
     string _STS_CustomCommandCheck = "";
     private bool _STS_ToggleKeywords = false;
     List<string> _STS_CustomCommandCheckKeywords = new List<string>();
+    #endregion
 
-    //Map Editor (ME)
+
+    //Map Editor (ME) ----------------------------------------------
     #region MapEditor
     //Prefab Array
-    private GameObject[] _ME_Prefabs = new GameObject[0];
-    private string[] _ME_SearchResults = new string[0];
+    GameObject[] _ME_Prefabs = new GameObject[0];
+    string[] _ME_SearchResults = new string[0];
 
     //Array Options
-    private string _ME_SearchPrefab = "";
-    private bool _ME_HideNames = true;
-    private float _ME_ButtonSize = 1, _ME_CollomLength = 4;
+    string _ME_SearchPrefab = "";
+    bool _ME_HideNames = true;
+    float _ME_ButtonSize = 1, _ME_CollomLength = 4;
 
     //Array Selection
-    private int _ME_SelectedID = 99999999, _ME_CheckSelectedID = 999999999;
+    int _ME_SelectedID = 99999999, _ME_CheckSelectedID = 999999999;
 
     //Options
-    private bool _ME_HideOptions = true;
-    private int _ME_OptionsStates = 0, _ME_PlacementStates = 0;
+    bool _ME_HideOptions = true;
+    int _ME_OptionsStates = 0, _ME_PlacementStates = 0;
 
     //Placement Option
-    private float _ME_PaintSpeed = 1, _ME_PaintTimer = 0;
-    private bool _ME_SnapPosActive = false;
+    float _ME_PaintSpeed = 1, _ME_PaintTimer = 0;
+    bool _ME_SnapPosActive = false;
 
     //Onscene Options
-    private bool _ME_ShowOptionsInScene;
-    private int _ME_InScene_SelectedID;
+    bool _ME_ShowOptionsInScene;
+    int _ME_InScene_SelectedID;
 
     //Position
-    private Vector3 _ME_MousePos, _ME_SnapPos, _ME_ObjectPos;
-    private Vector2 _ME_GridSize = new Vector2(1, 1);
+    Vector3 _ME_MousePos, _ME_SnapPos, _ME_ObjectPos;
+    Vector2 _ME_GridSize = new Vector2(1, 1);
 
     //Rotation/Size
-    private float _ME_Rotation, _ME_Size = 1;
-    private bool _ME_RandomRot = false;
-    private Vector2 _ME_PrevMousePos = new Vector3(0,0,0);
+    float _ME_Rotation, _ME_Size = 1;
+    bool _ME_RandomRot = false;
+    Vector2 _ME_PrevMousePos = new Vector3(0,0,0);
 
     //Check Buttons Event
-    private bool _ME_MouseDown, _ME_ShiftDown, _ME_CtrlDown, _ME_ClickMenu;
+    bool _ME_MouseDown, _ME_ShiftDown, _ME_CtrlDown, _ME_ClickMenu;
 
     //Placement
-    private GameObject _ME_ParentObj, _ME_ExampleObj;
+    GameObject _ME_ParentObj, _ME_ExampleObj;
+    Transform _ME_HitObject;
+    bool _ME_RotateWithObject = false;
 
     //Other
-    private Vector2 _ME_ScrollPos1, _ME_ClickPos;
-    private Texture2D[] _ME_PrefabIcon = new Texture2D[0];
-    private bool _ME_FirstLoad = true;
+    Vector2 _ME_ScrollPos1, _ME_ClickPos;
+    Texture2D[] _ME_PrefabIcon = new Texture2D[0];
+    bool _ME_FirstLoad = true;
     #endregion
 
 
@@ -177,17 +203,21 @@ public class Tool_QuickStart : EditorWindow
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("=", GUILayout.Width(20)))
         {
+            _WindowID = 0;
             _SelectWindow = !_SelectWindow;
         }
         if (_SelectWindow)
         {
-            GUILayout.Label("Navigation");
+            GUILayout.Label("Tool Navigation");
             GUILayout.EndHorizontal();
 
-            if (GUILayout.Button("Home", GUILayout.Height(50))) { _WindowID = 0; _SelectWindow = false; ChangeTab(); }
-            if (GUILayout.Button("FileFinder", GUILayout.Height(50))) { _WindowID = 1; _SelectWindow = false; ChangeTab(); }
-            if (GUILayout.Button("Script to String", GUILayout.Height(50))) { _WindowID = 2; _SelectWindow = false; ChangeTab(); }
-            if (GUILayout.Button("MapEditor", GUILayout.Height(50))) { _WindowID = 3; _SelectWindow = false; ChangeTab(); }
+            _Search_Window = EditorGUILayout.TextField("Search: ", _Search_Window);
+
+            for (int i = 1; i < _WindowNames.Length; i++)
+            {
+                if (_Search_Window == "" || _WindowNames[i].ToLower().Contains(_Search_Window.ToLower()))
+                    if (GUILayout.Button(_WindowNames[i], GUILayout.Height(30))) { _WindowID = i; _SelectWindow = false; _Search_Window = ""; ChangeTab(); }
+            }
         }
         else
         {
@@ -1774,6 +1804,29 @@ public class Tool_QuickStart : EditorWindow
     //FileFinder
     void FileFinder()
     {
+        _ToolState = GUILayout.Toolbar(_ToolState, new string[] { "Assets", "Scene" });
+
+        if (_ToolState == 0)
+        {
+            FileFinder_Search();
+            FileFinder_SearchAssets();
+        }
+        else
+        {
+            FileFinder_SceneSearch();
+            _FF_Scene_InsceneInfo = EditorGUILayout.Toggle("InScene Info", _FF_Scene_InsceneInfo);
+            FileFinder_Scene();
+        }
+
+        //stop focus when switching
+        if (_ToolStateCheck != _ToolState)
+        {
+            EditorGUI.FocusTextInControl("searchproject");
+            _ToolStateCheck = _ToolState;
+        }
+    }
+    void FileFinder_Search()
+    {
         _FF_Search = EditorGUILayout.TextField("Search:", _FF_Search);
         _FF_Type = EditorGUILayout.TextField("Type:", _FF_Type);
         GUILayout.Label("(" + _FF_Results + "/" + _FF_Total + ")");
@@ -1781,18 +1834,57 @@ public class Tool_QuickStart : EditorWindow
         _FF_Results = 0;
         _FF_Total = 0;
 
-        string[] search_results = System.IO.Directory.GetFiles("Assets/", "*" + _FF_Type, System.IO.SearchOption.AllDirectories);
-
-        _ScrollPos = EditorGUILayout.BeginScrollView(_ScrollPos);
-        for (int i = 0; i < search_results.Length; i++)
+        if (_FF_Search != _FF_SearchCheck)
         {
-            if (search_results[i].ToLower().Contains(_FF_Search.ToLower()))
+            _FF_SearchResults = System.IO.Directory.GetFiles("Assets/", "*" + _FF_Type, System.IO.SearchOption.AllDirectories);
+            _FF_SearchResultsChange = _FF_SearchResults;
+            _FF_SearchCheck = _FF_Search;
+        }
+    }
+    void FileFinder_SearchAssets()
+    {
+        _ScrollPos = EditorGUILayout.BeginScrollView(_ScrollPos);
+        for (int i = 0; i < _FF_SearchResults.Length; i++)
+        {
+            if (_FF_SearchResults[i].ToLower().Contains(_FF_Search.ToLower()))
             {
                 GUILayout.BeginHorizontal("Box");
-                GUILayout.Label(search_results[i], GUILayout.Width(Screen.width - 80));
-                if(GUILayout.Button("Select", GUILayout.Width(50)))
+                GUILayout.Label(_FF_SearchResults[i], GUILayout.Width(Screen.width - 80));
+                if (GUILayout.Button("Select", GUILayout.Width(50)))
                 {
-                    Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(search_results[i]);
+                    Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(_FF_SearchResults[i]);
+                }
+                GUILayout.EndHorizontal();
+                _FF_Results++;
+            }
+            _FF_Total++;
+        }
+        EditorGUILayout.EndScrollView();
+    }
+
+    void FileFinder_SceneSearch()
+    {
+        _FF_Scene_Search = EditorGUILayout.TextField("Search:", _FF_Scene_Search);
+        GUILayout.Label("(" + _FF_Results + "/" + _FF_Total + ")");
+
+        _FF_Results = 0;
+        _FF_Total = 0;
+
+        if (_FF_Scene_Objects.Length == 0)
+            _FF_Scene_Objects = FindObjectsOfType<GameObject>();
+    }
+    void FileFinder_Scene()
+    {
+        _ScrollPos = EditorGUILayout.BeginScrollView(_ScrollPos);
+        for (int i = 0; i < _FF_Scene_Objects.Length; i++)
+        {
+            if (_FF_Scene_Objects[i].name.ToLower().Contains(_FF_Scene_Search.ToLower()))
+            {
+                GUILayout.BeginHorizontal("Box");
+                GUILayout.Label(_FF_Scene_Objects[i].name, GUILayout.Width(Screen.width - 80));
+                if (GUILayout.Button("Select", GUILayout.Width(50)))
+                {
+                    Selection.activeObject = _FF_Scene_Objects[i];
                 }
                 GUILayout.EndHorizontal();
                 _FF_Results++;
@@ -1815,7 +1907,7 @@ public class Tool_QuickStart : EditorWindow
         STS_Display_TextEditor();
         EditorGUILayout.EndScrollView();
     }
-    private void STS_InputOutput()
+    void STS_InputOutput()
     {
         GUILayout.Space(20);
         //Input
@@ -1827,7 +1919,7 @@ public class Tool_QuickStart : EditorWindow
         EditorGUILayout.TextField("", _STS_ScriptOutput, GUILayout.Width(Screen.width - 5));
         GUILayout.Space(20);
     }
-    private void STS_Show_Keywords()
+    void STS_Show_Keywords()
     {
         //TextEditor Info
         GUILayout.Label("Use Custom Keywords to fix lines that should not be included into the commend. \n" +
@@ -1872,7 +1964,7 @@ public class Tool_QuickStart : EditorWindow
                 GUILayout.EndHorizontal();
             }
     }
-    private void STS_Display_TextEditor()
+    void STS_Display_TextEditor()
     {
         //Preview
         List<string> output = new List<string>();
@@ -1923,7 +2015,7 @@ public class Tool_QuickStart : EditorWindow
             GUILayout.EndHorizontal();
         }
     }
-    private void STS_AddCommonKeywords()
+    void STS_AddCommonKeywords()
     {
         STS_Add_Keyword("float");
         STS_Add_Keyword("double");
@@ -1939,7 +2031,7 @@ public class Tool_QuickStart : EditorWindow
 
         _STS_ScriptOutput = STS_ConvertScriptToString();
     }
-    private void STS_Add_Keyword(string keyword)
+    void STS_Add_Keyword(string keyword)
     {
         bool exist = false;
         for (int i = 0; i < _STS_CustomCommandCheckKeywords.Count; i++)
@@ -1951,7 +2043,7 @@ public class Tool_QuickStart : EditorWindow
         if (!exist)
             _STS_CustomCommandCheckKeywords.Add(keyword);
     }
-    private string STS_ConvertScriptToString()
+    string STS_ConvertScriptToString()
     {
         _STS_ScriptOutput = "";
         string scriptasstring = "\"";
@@ -2087,7 +2179,7 @@ public class Tool_QuickStart : EditorWindow
 
         GUILayout.EndVertical();
     }
-    private void ME_ObjectView_Header()
+    void ME_ObjectView_Header()
     {
         GUILayout.BeginHorizontal();
         _ME_OptionsStates = GUILayout.Toolbar(_ME_OptionsStates, new string[] { "Icon", "Text" });
@@ -2105,7 +2197,7 @@ public class Tool_QuickStart : EditorWindow
         GUILayout.EndHorizontal();
         _ME_SearchPrefab = EditorGUILayout.TextField("Search: ", _ME_SearchPrefab);
     }
-    private void ME_ObjectView_Objects()
+    void ME_ObjectView_Objects()
     {
         Color defaultColor = GUI.backgroundColor;
         GUILayout.BeginVertical("Box");
@@ -2169,7 +2261,7 @@ public class Tool_QuickStart : EditorWindow
         GUILayout.EndScrollView();
         GUILayout.EndVertical();
     }
-    private void ME_ObjectView_Options()
+    void ME_ObjectView_Options()
     {
         GUILayout.BeginVertical("Box");
         if (!_ME_HideOptions)
@@ -2253,14 +2345,26 @@ public class Tool_QuickStart : EditorWindow
             }
 
             createdObj.transform.parent = _ME_ParentObj.transform;
+
+            //SnapPos
             if (_ME_SnapPosActive)
                 createdObj.transform.position = _ME_SnapPos;
             else
                 createdObj.transform.position = _ME_MousePos;
+
+            //Rotation
+            /*
             if (_ME_RandomRot)
                 createdObj.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
             else
                 createdObj.transform.rotation = Quaternion.Euler(0, _ME_Rotation, 0);
+            */
+
+            if (_ME_RotateWithObject)
+                createdObj.transform.rotation = Quaternion.Euler(_ME_HitObject.eulerAngles.x, _ME_Rotation, _ME_HitObject.eulerAngles.z);
+            else
+                createdObj.transform.rotation = Quaternion.Euler(0, _ME_Rotation, 0);
+            //Test
         }
     }
     void ME_CleanParent()
@@ -2313,6 +2417,7 @@ public class Tool_QuickStart : EditorWindow
     //OnSceneGUI
     void OnSceneGUI(SceneView sceneView)
     {
+        //MapEditor
         if (_WindowID == 3)
         {
             Event e = Event.current;
@@ -2323,6 +2428,9 @@ public class Tool_QuickStart : EditorWindow
             {
                 //Check MousePosition
                 _ME_MousePos = hitInfo.point;
+
+                //Hit Object
+                _ME_HitObject = hitInfo.transform;
 
                 //Create Example Object
                 if (_ME_SelectedID <= _ME_Prefabs.Length)
@@ -2348,7 +2456,15 @@ public class Tool_QuickStart : EditorWindow
                 //Set Example Object Position + Rotation
                 if (_ME_ExampleObj != null)
                 {
-                    _ME_ExampleObj.transform.rotation = Quaternion.Euler(0, _ME_Rotation, 0);
+                    //Rotate with hit object
+                    //Debug.Log("Transform: X" + _ME_HitObject.eulerAngles.x.ToString() + "  Y  " + _ME_HitObject.eulerAngles.z.ToString());
+
+                    //Rotation
+                    if (_ME_RotateWithObject)
+                        _ME_ExampleObj.transform.rotation = Quaternion.Euler(_ME_HitObject.eulerAngles.x, _ME_Rotation, _ME_HitObject.eulerAngles.z);
+                    else
+                        _ME_ExampleObj.transform.rotation = Quaternion.Euler(0, _ME_Rotation, 0);
+
                     _ME_ExampleObj.transform.localScale = new Vector3(_ME_Size, _ME_Size, _ME_Size);
                     if (!e.shift && !e.control)
                     {
@@ -2462,6 +2578,21 @@ public class Tool_QuickStart : EditorWindow
                             Handles.DrawLine(new Vector3(calc2.x - _ME_GridSize.x + _ME_GridSize.x * ver, hitInfo.point.y, calc2.y - lineLength), new Vector3(calc2.x - _ME_GridSize.x + _ME_GridSize.x * ver, hitInfo.point.y, calc2.y + lineLength));
                         }
                     }
+                }
+            }
+        }
+
+        //FileFinder
+        if (_FF_Scene_InsceneInfo)
+        {
+            Handles.color = new Color(0, 1, 0, 0.3f);
+            for (int i = 0; i < _FF_Scene_Objects.Length; i++)
+            {
+                if (_FF_Scene_Objects[i].name.ToLower().Contains(_FF_Scene_Search.ToLower()))
+                {
+
+                    Handles.SphereHandleCap(1, _FF_Scene_Objects[i].transform.position, Quaternion.identity, 3f, EventType.Repaint);
+                    Handles.Label(_FF_Scene_Objects[i].transform.position, _FF_Scene_Objects[i].name);
                 }
             }
         }
