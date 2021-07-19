@@ -44,62 +44,62 @@ Feel free to use/copy files from this project._
 - [BasicNavMashAI.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/AI/BasicNavMeshAI.cs)
 
 # Weapons / Shooting
-- [Bullet.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/BulletScript/Bullet.cs)
-- [Shooting.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Weapons/Shooting.cs)
-- [ShootingRayCast.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Weapons/ShootingRayCast.cs)
+- [Bullet.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/BulletScript/Bullet.cs)
+- [Shooting.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Weapons/Shooting.cs)
+- [ShootingRayCast.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Weapons/ShootingRayCast.cs)
 
 # Editor
-- [EditorWindowExample.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/EditorWindowExample.cs)
-- [SceneAtmosphereEditor.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/SceneAtmosphereEditor.cs)
-- [Tool_CreateHexagonGrid.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_CreateHexagonGrid.cs) 
-- [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_QuickStart.cs)
-- [Tool_TerrainGenerator.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Editor/Tool_TerrainGenerator.cs)
+- [EditorWindowExample.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/EditorWindowExample.cs)
+- [SceneAtmosphereEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/SceneAtmosphereEditor.cs)
+- [Tool_CreateHexagonMesh.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_CreateHexagonMesh.cs) 
+- [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs)
+- [Tool_TerrainGenerator.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_TerrainGenerator.cs)
 
 # Saving / Loading Data
-- [SaveLoad_JSON.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_JSON.cs)
-- [SaveLoad_XML.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_XML.cs)
+- [SaveLoad_JSON.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_JSON.cs)
+- [SaveLoad_XML.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/SaveLoadHandler/SaveLoad_XML.cs)
 
 # Networking
-- [ReadTwitchChat.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Networking/ReadTwitchChat.cs)
+- [ReadTwitchChat.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Networking/ReadTwitchChat.cs)
 
 # Useful
-- [AudioHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/AudioHandler.cs)
-- [EnemySpawnHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/EnemySpawnHandler.cs)
-- [Health.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/Health.cs)
-- [Interactable.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/Interactable.cs)
-- [InteractionHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/InteractionHandler.cs)
-- [LightEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LightEffects.cs)
-- [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
-- [MenuHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/MenuHandler.cs)
-- [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
-- [ObjectPoolSimple.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/ObjectPool/ObjectPoolSimple.cs)
-- [SettingsHandler.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/SettingsHandler.cs)
-- [Turret.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/Turret.cs)
-- [UIEffects.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Useful/UIEffects.cs)
+- [AudioHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/AudioHandler.cs)
+- [EnemySpawnHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/EnemySpawnHandler.cs)
+- [Health.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/Health.cs)
+- [Interactable.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/Interactable.cs)
+- [InteractionHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/InteractionHandler.cs)
+- [LightEffects.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/LightEffects.cs)
+- [LoadScenes.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/LoadScenes.cs)
+- [MenuHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/MenuHandler.cs)
+- [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
+- [ObjectPoolSimple.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ObjectPool/ObjectPoolSimple.cs)
+- [SettingsHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/SettingsHandler.cs)
+- [Turret.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/Turret.cs)
+- [UIEffects.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/UIEffects.cs)
 
 # Examples
-- [ScriptebleGameObject.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/RandomExamples/ScriptebleGameObject.cs)
-- [StringFormats.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/RandomExamples/StringFormats.cs)
+- [ScriptebleGameObject.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/RandomExamples/ScriptebleGameObject.cs)
+- [StringFormats.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/RandomExamples/StringFormats.cs)
 
 # Practical
-- [DontDestroy.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/DontDestroy.cs)
-- [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/DoEvent.cs)
-- [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/OnCollision.cs)
-- [OnCollision2D.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/OnCollision2D.cs)
-- [PosToPos.csw](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/PosToPos.cs)
-- [Rotation.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Practical/Rotation.cs)
+- [DontDestroy.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/DontDestroy.cs)
+- [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/DoEvent.cs)
+- [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/OnCollision.cs)
+- [OnCollision2D.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/OnCollision2D.cs)
+- [PosToPos.csw](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/PosToPos.cs)
+- [Rotation.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/Rotation.cs)
 
 # MathAndAlgorithms
-- [Flocking](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/tree/main/Assets/Scripts/MathAndAlgorithms/Flocking)
-- [LangtonsAnt](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/tree/main/Assets/Scripts/MathAndAlgorithms/LangtonsAnt)
-- [LSytem](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/tree/main/Assets/Scripts/MathAndAlgorithms/L-System)
+- [Flocking](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/tree/main/Assets/Scripts/MathAndAlgorithms/Flocking)
+- [LangtonsAnt](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/tree/main/Assets/Scripts/MathAndAlgorithms/LangtonsAnt)
+- [LSytem](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/tree/main/Assets/Scripts/MathAndAlgorithms/L-System)
 
 # Other
-- [MVD_Namespace.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Other/MVD_Namespace.cs)
-- [3D Models](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/tree/main/Assets/Art/Models)
+- [MVD_Namespace.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Other/MVD_Namespace.cs)
+- [3D Models](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/tree/main/Assets/Art/Models)
 
 # License & Copyright
-Licensed under the [MIT License](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/LICENSE)
+Licensed under the [MIT License](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/LICENSE)
 
 Social Info: 
 [Portfolio](https://www.marcelvanduijn.com/)
