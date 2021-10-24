@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightEffects : MonoBehaviour
 {
-    public enum LightEffectOptions { Flickering, Off, On };
+    public enum LightEffectOptions { Flickering, Off, On , Breath, Flame, Thunder};
 
     [Header("Settings")]
     [SerializeField] private LightEffectOptions _LightEffectOption = LightEffectOptions.Flickering;
