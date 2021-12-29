@@ -10,6 +10,8 @@ _This project contains scripts/art/prefabs that can be used for unity projects.
 The files are made by me and do not contain copyrighted material.
 Feel free to use/copy files from this project._
 
+_Donate (Crypto): **0x7FaA4ACF568F7fBdB907A5862962C755ddc381A1**_
+
 <!-- [Wiki](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/wiki) -->
 ### HighLight: [Tool_QuickStart.cs](#quickstart)
 
@@ -171,3 +173,5 @@ MapEditor
 <a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
 <img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_MapEditor.png">
 </a>
+
+_Donate (Crypto): **0x7FaA4ACF568F7fBdB907A5862962C755ddc381A1**_
