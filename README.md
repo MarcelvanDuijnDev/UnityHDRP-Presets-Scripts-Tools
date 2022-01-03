@@ -11,9 +11,9 @@ The files are made by me and do not contain copyrighted material.
 Feel free to use/copy files from this project._
 
 <!-- [Wiki](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/wiki) -->
-### HighLight: [Tool_QuickStart.cs](#quickstart)
+### HighLight: [Tool_QuickStart.cs](#quickstart) < _Multi purpose Unity tool_
 
-### Content:
+### Content (Scripts):
 * [Movement](#movement)
 * [Vehicles](#vehicles)
 * [AI](#ai)
@@ -27,6 +27,7 @@ Feel free to use/copy files from this project._
 * [Practical](#practical)
 * [MathAndAlgorithms](#mathandalgorithms)
 * [Other](#other)
+### Other:
 * [License & Copyright](#license--copyright)
 * [Social Info / Donate](#social-info--donate)
 
@@ -178,6 +179,7 @@ MapEditor
 <a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
 <img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_MapEditor.png">
 </a>
+
 
 First commit: Oct 13, 2020
 
