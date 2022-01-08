@@ -11,7 +11,9 @@ The files are made by me and do not contain copyrighted material.
 Feel free to use/copy files from this project._
 
 <!-- [Wiki](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/wiki) -->
-### HighLight: [Tool_QuickStart.cs](#quickstart) < _Multi purpose Unity tool_
+#### HighLights: 
+* [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_QuickStart.cs) < _Multi purpose Unity tool_
+* [AudioHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/AudioHandler.cs) < _Easy to use Audio Handler_
 
 ### Content (Scripts):
 * [Movement](#movement)
@@ -43,7 +45,6 @@ Feel free to use/copy files from this project._
 # Vehicles
 - [CarRealistic.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Vehicle/CarRealistic.cs)
 - [CarArcade.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Vehicle/CarArcade.cs)
-- [SpaceShip.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/Vehicle/SpaceShip.cs)
 
 # AI
 - [BasicNavMashAI.cs](https://github.com/MarcelvanDuijnDev/UnityPresetsHDRP/blob/main/Assets/Scripts/AI/BasicNavMeshAI.cs)
@@ -54,17 +55,18 @@ Feel free to use/copy files from this project._
 - [ShootingRayCast.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Weapons/ShootingRayCast.cs)
 
 # Editor
-- [Tool_Commands.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_Commands.cs) 
-- [Tool_CreateHexagonMesh.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_CreateHexagonMesh.cs) 
-- [Tool_FileFinder.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_FileFinder.cs)
-- [Tool_MapEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_MapEditor.cs)
-- [Tool_Math.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_Math.cs)
-- [Tool_ScriptToString.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_ScriptToString.cs)
-- [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs)
-- [Tool_Atmosphere.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_Atmosphere.cs)
+- [AudioZoneEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/AudioZoneEditor.cs)
+- [DialogSystemEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/DialogSystemEditor.cs)
+- [EditorWindowExample.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/EditorWindowExample.cs)
+- [Tool_Commands.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_Commands.cs)
+- [Tool_CreateHexagonMesh.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_CreateHexagonMesh.cs)
+- [Tool_FileFinder.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_FileFinder.cs)
+- [Tool_MapEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_MapEditor.cs)
+- [Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_QuickStart.cs)
+- [Tool_ScriptToString.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_ScriptToString.cs)
+- [Tool_Atmosphere.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/Tool_Atmosphere.cs)
 
 # Saving / Loading Data
-- [Read_ExcelFile.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ReadWriteFiles/Read_ExcelFile.cs)
 - [ReadWrite_TextFile.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ReadWriteFiles/ReadWrite_TextFile.cs)
 - [SaveLoad_JSON.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ReadWriteFiles/SaveLoad_JSON.cs)
 - [SaveLoad_XML.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ReadWriteFiles/SaveLoad_XML.cs)
@@ -74,8 +76,8 @@ Feel free to use/copy files from this project._
 
 # Audio
 - [AudioHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/AudioHandler.cs)
-- [AudioZoneBox.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/AudioZoneBox.cs)
-- [AudioZoneSphere.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/AudioZoneSphere.cs)
+- [AudioZone.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/AudioZone.cs)
+- [AudioZoneEditor.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Editor/AudioZoneEditor.cs)
 - [ReadAudioFile.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/ReadAudioFile.cs)
 
 # Useful
@@ -92,6 +94,7 @@ Feel free to use/copy files from this project._
 - [MenuHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/MenuHandler.cs)
 - [ObjectPool.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ObjectPool/ObjectPool.cs)
 - [ObjectPoolSimple.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/ObjectPool/ObjectPoolSimple.cs)
+- [ObjectsInRange.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/ObjectsInRange.cs)
 - [SettingsHandler.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/SettingsHandler.cs)
 - [Turret.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/Turret.cs)
 
@@ -104,12 +107,14 @@ Feel free to use/copy files from this project._
 - [Disable.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/Disable.cs)
 - [DoEvent.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/DoEvent.cs)
 - [DontDestroy.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/DontDestroy.cs)
+- [FadeInOut.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/FadeInOut.cs)
 - [InteractWithPhysics.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/InteractWithPhysics.cs)
 - [OnCollision.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/OnCollision.cs)
 - [OnCollision2D.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/OnCollision2D.cs)
 - [PauseMenu.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/PauseMenu.cs)
 - [PosToPos.csw](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/PosToPos.cs)
 - [Rotation.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/Rotation.cs)
+- [SolarSystem.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Practical/SolarSystem.cs)
 - [UIEffects.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/UIEffects.cs)
 
 # MathAndAlgorithms
@@ -126,7 +131,7 @@ Licensed under the [MIT License](https://github.com/MarcelvanDuijnDev/UnityHDRP-
 
 tl;dr:
 Without restrictions / feel free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software
+copies of the scripts/content
 
 # Social Info / Donate
 
@@ -139,47 +144,6 @@ Social Info:
 [ArtStation](https://www.artstation.com/marcelvanduijn)
 [Instagram](https://www.instagram.com/marcelvanduijn_/)
 [GitHub](https://github.com/MarcelvanDuijnDev)
-
-_Donate (Crypto): **0x7FaA4ACF568F7fBdB907A5862962C755ddc381A1**_
-
-# highlight
-### quickstart
-[Tool_QuickStart.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs)
-
-Create a scene with scripts assigned with the press of a button.
-
-<a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
-<img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_CreateMap.gif">
-</a>
-
-
-A library of scripts that can be added with one click.
-
-<a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
-<img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_SearchScripts.gif">
-</a>
-
-
-Multiple options
-
-<a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
-<img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_Options.png">
-</a>
-
-
-FileFinder
-
-<a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
-<img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_FileFinder.png">
-</a>
-
-
-MapEditor
-
-<a href="https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Editor/Tool_QuickStart.cs">
-<img align="center" width="50%" src="https://github.com/MarcelvanDuijnDev/MarcelvanDuijnDev/blob/main/Images/Tool_QuickStart_Preview_MapEditor.png">
-</a>
-
 
 First commit: Oct 13, 2020
 
