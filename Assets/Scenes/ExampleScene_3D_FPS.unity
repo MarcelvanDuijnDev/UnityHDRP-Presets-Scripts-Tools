@@ -866,7 +866,6 @@ GameObject:
   - component: {fileID: 1625999865}
   - component: {fileID: 1625999864}
   - component: {fileID: 1625999863}
-  - component: {fileID: 1625999862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -874,24 +873,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1625999862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625999861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a3424f054ff9242a2e06d69801de2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _NormalSpeed: 5
-  _SprintSpeed: 8
-  _JumpSpeed: 5
-  _Gravity: 20
-  _CameraSensitivity: 1
-  _Head: {fileID: 0}
 --- !u!143 &1625999863
 CharacterController:
   m_ObjectHideFlags: 0
@@ -919,13 +900,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1625999861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844e6b46b635da542b91155b572d9190, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e905298c61c1664f9448c822e53f0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MaxHealth: 100
-  _OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  _NormalSpeed: 5
+  _SprintSpeed: 8
+  _JumpSpeed: 5
+  _Gravity: 20
+  _CameraSensitivity: 1
+  _Head: {fileID: 34851562}
 --- !u!23 &1625999865
 MeshRenderer:
   m_ObjectHideFlags: 0
