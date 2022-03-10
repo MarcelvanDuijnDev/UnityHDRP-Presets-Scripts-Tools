@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -116,15 +116,12 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < _ObjectPools.Length; i++)
         {
             if (isprefab)
+            {
                 if (objname == _ObjectPools[i]._Prefab.name)
-                {
                     return i;
-                }
-                else
-            if (objname == _ObjectPools[i]._Name)
-                {
-                    return i;
-                }
+            }
+            else if (objname == _ObjectPools[i]._Name)
+                return i;
         }
         Debug.Log(objname + " Not Found");
         return 0;
