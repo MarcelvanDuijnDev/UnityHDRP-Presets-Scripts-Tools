@@ -83,6 +83,7 @@ Feel free to use/copy files from this project._
 - [ReadAudioFile.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Audio/ReadAudioFile.cs)
 
 # Useful
+- [AnimatorOverrider.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/AnimatorOverrider.cs)
 - [DebugCommandBase.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/DebugCommandBase.cs)
 - [DebugConsole.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/DebugConsole.cs)
 - [DialogSystem.cs](https://github.com/MarcelvanDuijnDev/UnityHDRP-Presets-Scripts-Tools/blob/main/Assets/Scripts/Useful/DialogSystem.cs)
