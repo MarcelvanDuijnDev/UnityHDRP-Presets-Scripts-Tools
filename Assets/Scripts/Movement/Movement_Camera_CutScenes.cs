@@ -8,28 +8,42 @@ public class Movement_Camera_CutScenes : MonoBehaviour
     [SerializeField] private LayerMask _TargetLayer;
 
     private int _Current_CutScene;
+    private bool _HasCutScenes;
 
     [Header("Debug Gizmos")]
     [SerializeField] private int _Gizmos_Current_CutScene;
 
-    void Update()
+    private void Start()
     {
-        //If OnTrigger
         for (int i = 0; i < _CutScenes.Count; i++)
         {
             if (_CutScenes[i].OnTrigger)
             {
-                if (_CutScenes[i].CurrrentScene < _CutScenes[i].CutScene_Scenes.Count)
-                {
-                    int detectplayer = Physics.BoxCastAll(_CutScenes[i].CutSceneTriggerPos.position, _CutScenes[i].Size, transform.forward, Quaternion.identity, 1, _TargetLayer).Length;
-
-                    if (detectplayer > 0)
-                        Movement_Camera.CAM.CutScene(true, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutScenePosition, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneTarget, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneRotation, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].FollowTarget);
-                    else
-                        Movement_Camera.CAM.CutScene(false);
-                }
+                _HasCutScenes = true;
+                break;
             }
         }
+    }
+
+    void Update()
+    {
+        //If OnTrigger
+        if (_HasCutScenes)
+            for (int i = 0; i < _CutScenes.Count; i++)
+            {
+                if (_CutScenes[i].OnTrigger)
+                {
+                    if (_CutScenes[i].CurrrentScene < _CutScenes[i].CutScene_Scenes.Count)
+                    {
+                        int detectplayer = Physics.BoxCastAll(_CutScenes[i].CutSceneTriggerPos.position, _CutScenes[i].Size, transform.forward, Quaternion.identity, 1, _TargetLayer).Length;
+
+                        if (detectplayer > 0)
+                            Movement_Camera.CAM.CutScene(true, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutScenePosition, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneTarget, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneRotation, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].FollowTarget);
+                        else
+                            Movement_Camera.CAM.CutScene(false);
+                    }
+                }
+            }
     }
 
     public void NextScene()
@@ -40,22 +54,61 @@ public class Movement_Camera_CutScenes : MonoBehaviour
         else
             Movement_Camera.CAM.CutScene(false);
     }
+
+    //Set Cutscene
     public void Set_CutScene(int cutsceneid)
     {
         _Current_CutScene = cutsceneid;
     }
+    public void Set_CutScene(string cutscenename)
+    {
+        for (int i = 0; i < _CutScenes.Count; i++)
+        {
+            if(cutscenename == _CutScenes[i].CutScene_Name)
+            {
+                _Current_CutScene = i;
+                break;
+            }
+        }
+    }
+
+    //Set Scene
     public void Set_Scene(int sceneid)
     {
         _CutScenes[_Current_CutScene].CurrrentScene = sceneid;
     }
+    public void Set_Scene(string scenename)
+    {
+        for (int i = 0; i < _CutScenes[_Current_CutScene].CutScene_Scenes.Count; i++)
+        {
+            if(scenename == _CutScenes[_Current_CutScene].CutScene_Scenes[i].Scene_Name)
+            {
+                _CutScenes[_Current_CutScene].CurrrentScene = i;
+                break;
+            }
+        }
+    }
     public void Set_Scene(int sceneid, bool startscene)
     {
         _CutScenes[_Current_CutScene].CurrrentScene = sceneid;
-        if (startscene == true)
-        {
+        if (startscene)
             Start_CutScene();
+    }
+    public void Set_Scene(string scenename, bool startscene)
+    {
+        for (int i = 0; i < _CutScenes[_Current_CutScene].CutScene_Scenes.Count; i++)
+        {
+            if (scenename == _CutScenes[_Current_CutScene].CutScene_Scenes[i].Scene_Name)
+            {
+                _CutScenes[_Current_CutScene].CurrrentScene = i;
+                if (startscene)
+                    Start_CutScene();
+                break;
+            }
         }
     }
+
+    //Start / Stop Scene
     public void Start_CutScene()
     {
         Movement_Camera.CAM.CutScene(true, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutScenePosition, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneTarget, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].CutSceneRotation, _CutScenes[_Current_CutScene].CutScene_Scenes[_CutScenes[_Current_CutScene].CurrrentScene].FollowTarget);
@@ -97,7 +150,7 @@ public class Movement_Camera_CutScenes : MonoBehaviour
 [System.Serializable]
 public class Movement_Camera_CutScene
 {
-    public string Info;
+    public string CutScene_Name;
 
     public List<Movement_Camera_CutSceneLocation> CutScene_Scenes;
     public int CurrrentScene;
@@ -111,7 +164,7 @@ public class Movement_Camera_CutScene
 [System.Serializable]
 public class Movement_Camera_CutSceneLocation
 {
-    public string Info;
+    public string Scene_Name;
 
     [Header("CutScene Settings")]
     public Vector3 CutScenePosition;
