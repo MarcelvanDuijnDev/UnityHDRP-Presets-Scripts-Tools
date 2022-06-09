@@ -11,6 +11,8 @@ public class DoEvent : MonoBehaviour
     [SerializeField] private bool _OnUpdate = false;
     [SerializeField] private bool _OnButtonPressed = false;
 
+    private bool _AsyncLoading = false;
+
     void Start()
     {
         if (_OnStart)
@@ -32,16 +34,15 @@ public class DoEvent : MonoBehaviour
         _Event.Invoke();
     }
 
+    //Set Object true/false
     public void SetGameobject_InActive(GameObject targetobject)
     {
         targetobject.SetActive(false);
     }
-
     public void SetGameobject_Active(GameObject targetobject)
     {
         targetobject.SetActive(true);
     }
-
     public void SetGameObject_Negative(GameObject targetobject)
     {
         if (targetobject.activeSelf)
@@ -50,6 +51,7 @@ public class DoEvent : MonoBehaviour
             targetobject.SetActive(true);
     }
 
+    //Load/Reload Scenes
     public void LoadScene(int sceneid)
     {
         SceneManager.LoadScene(sceneid);
@@ -58,6 +60,54 @@ public class DoEvent : MonoBehaviour
     {
         SceneManager.LoadScene(scenename);
     }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void AsyncReloadScene()
+    {
+        if (!_AsyncLoading)
+        {
+            _AsyncLoading = true;
+            StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
+        }
+    }
+    public void AsyncLoadScene(int sceneid)
+    {
+        if (!_AsyncLoading)
+        {
+            _AsyncLoading = true;
+            StartCoroutine(LoadSceneAsync(sceneid));
+        }
+    }
+    public void AsyncLoadScene(string scenename)
+    {
+        if (!_AsyncLoading)
+        {
+            _AsyncLoading = true;
+            StartCoroutine(LoadSceneAsync(scenename));
+        }
+    }
+    private IEnumerator LoadSceneAsync(string scenename)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scenename);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+    private IEnumerator LoadSceneAsync(int sceneid)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneid);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    //Quit
     public void Quit()
     {
         Application.Quit();

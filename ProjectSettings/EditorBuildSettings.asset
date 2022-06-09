@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/ExampleScene_3D_TopDown.unity
     guid: 302ebf5ebfcc90e47982b9127958b2f7
   - enabled: 1
+    path: Assets/Scenes/ExampleScene_Animation.unity
+    guid: 0387f4a90075c5a4c838f762fb6c815a
+  - enabled: 1
+    path: Assets/Scenes/ExampleScene_Audio.unity
+    guid: 69c9e5ee1165c34439238813bbb64242
+  - enabled: 1
     path: Assets/Scenes/ExampleScene_Dialog.unity
     guid: d3ff86b96bff4314498e964e9944ccf5
   - enabled: 1

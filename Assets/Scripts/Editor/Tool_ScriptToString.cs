@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
@@ -98,7 +98,8 @@ public class Tool_ScriptToString : EditorWindow
     private string ConvertScriptToString()
     {
         string newstring = "\"";
-        string[] readText = File.ReadAllLines(GetPath());
+        string path = GetPath();
+        string[] readText = File.ReadAllLines(path);
 
         for (int i = 0; i < readText.Length; i++)
         {
@@ -125,9 +126,7 @@ public class Tool_ScriptToString : EditorWindow
         {
             if (filepaths[i].Contains(_InputScript.name + ".cs"))
             {
-                string[] filepathsplit = filepaths[i].Split(char.Parse("\\"));
-                if (filepathsplit[filepathsplit.Length-1] == _InputScript.name + ".cs")
-                    return filepaths[i];
+                return filepaths[i];
             }
         }
         return "";
