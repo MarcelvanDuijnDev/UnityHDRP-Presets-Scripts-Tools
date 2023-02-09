@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ExampleScene_Vehicles.unity
     guid: 10e9ae72162759348b74e9bd75847ee7
+  - enabled: 1
+    path: Assets/Scenes/ExampleScene_ParticleSystems.unity
+    guid: e52094a43a12a764db53f3e8347a29d3
   m_configObjects: {}
