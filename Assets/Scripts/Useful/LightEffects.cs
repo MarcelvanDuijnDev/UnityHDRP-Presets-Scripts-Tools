@@ -34,7 +34,7 @@ public class LightEffects : MonoBehaviour
 
     void Update()
     {
-        switch(_LightEffectOption)
+        switch (_LightEffectOption)
         {
             case LightEffectOptions.Flickering:
                 while (_LightFlickerQ.Count >= _EffectStrength)
@@ -58,5 +58,12 @@ public class LightEffects : MonoBehaviour
     public void SetEffect(LightEffectOptions options)
     {
         _LightEffectOption = options;
+    }
+
+    public void ChangeLightIntensity(float amount)
+    {
+        _MinMaxIncrease.x += amount * Time.deltaTime;
+        if (_MinMaxIncrease.x < 0)
+            _MinMaxIncrease.x = 0;
     }
 }
