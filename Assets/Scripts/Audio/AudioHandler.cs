@@ -13,7 +13,7 @@ public class AudioHandler : MonoBehaviour
     [Header("AudioMixer/Audio")]
     [SerializeField] private AudioMixerGroup _AudioMixer = null;
 
-    [Header("Audio Category")]
+    [Header("Audio Categorys")]
     public List<AudioHandler_Category> Category = new List<AudioHandler_Category>();
 
     private string _CurrentScene;
@@ -256,7 +256,7 @@ public class AudioHandler : MonoBehaviour
     public void StartTrack(string trackname, int categoryid = 0)
     {
         int trackid = AudioHandler_GetTrackID_Safe(trackname, categoryid);
-        if (Category[categoryid].Sounds[trackid].Settings.AudioSource.isPlaying)
+        if (!Category[categoryid].Sounds[trackid].Settings.AudioSource.isPlaying)
             AudioHandler_PlayTrack(trackid, categoryid);
     }
     public void StartTrack(int trackid, int categoryid = 0)
@@ -462,7 +462,7 @@ public class AudioHandler : MonoBehaviour
     /// <summary>Set AudioSource Parent.</summary>
     public void ChangeAudioParent(string trackname, Transform newparent, int categoryid = 0)
     {
-        int audioid = Get_Track_ID(trackname);
+        int audioid = Get_Track_ID(trackname, categoryid);
         if (audioid != -1)
             Category[categoryid].Sounds[audioid].Settings.AudioSource.transform.parent = newparent;
     }
